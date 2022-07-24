@@ -12,6 +12,10 @@ require_once("constants.php");
 require_once("class/db_object.php");
 require_once("class/database.php");
 require_once("class/user.php");
+require_once("class/category.php");
+require_once("class/company.php");
+require_once("class/product.php");
+require_once("class/role.php");
 require_once("class/session.php");
 require_once("class/functions.php");
 

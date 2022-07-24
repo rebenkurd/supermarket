@@ -10,6 +10,7 @@
     <title>Supermarket</title>
     <!-- Styles -->
     <link href="assets/css/lib/data-table/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/lib/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/lib/themify-icons.css" rel="stylesheet">
     <link href="assets/css/lib/menubar/sidebar.css" rel="stylesheet">
     <link href="assets/css/lib/bootstrap.rtl.min.css" rel="stylesheet">

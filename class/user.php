@@ -37,7 +37,7 @@ class User extends Db_Object{
         }
     }
 
-    public function save(){
+    public function save_image(){
 
         
         if($this->id){

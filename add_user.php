@@ -5,30 +5,15 @@
 <?php
 if(isset($_POST['success'])){
         $user=new User();
-        $first_name=$user->first_name = $_POST['first_name'];
-        $last_name=$user->last_name = $_POST['last_name'];
-        $email=$user->email = $_POST['email'];
-        $phone=$user->phone = $_POST['phone'];
-        $password=$user->password = $_POST['password'];
-        $role=$user->role = $_POST['role'];
-        $addedby=$user->addedby = $_SESSION['user_id'];
-
-        if(empty($first_name)){
-            echo "تکایە خانەی ناوی سەرەتا پڕبکەرەوە";
-        }else if(empty($last_name)){
-            echo "تکایە خانەی ناوی کۆتا پڕبکەرەوە";
-        }else if(empty($email)){
-            echo "تکایە خانەی ناوی ئیمەیڵ پڕبکەرەوە";
-        }else if(empty($phone)){
-            echo "تکایە خانەی ژمارەی مۆبایل پڕبکەرەوە";
-        }else if(empty($password)){
-            echo "تکایە خانەی وشەی تێپەڕ پڕبکەرەوە";
-        }else if(empty($role)){
-            echo "تکایە ڕۆلێک هەڵبژێرە";
-        } else{
-            $user->save();
-            echo "زانیارییەکان زیادکرا";
-        }
+        $user->first_name = $_POST['first_name'];
+        $user->last_name = $_POST['last_name'];
+        $user->email = $_POST['email'];
+        $user->phone = $_POST['phone'];
+        $user->password = $_POST['password'];
+        $user->role = $_POST['role'];
+        $user->addedby = $_SESSION['user_id'];
+        $user->created_at=date("Y-m-d H:i:s");   
+        $user->save();
     }
 ?>
 <!-- sidebar -->
@@ -39,23 +24,11 @@ if(isset($_POST['success'])){
 <div class="content-wrap">
         <div class="main">
             <div class="container-fluid">
-
 <div class="row">
     <div class="col-lg-8 p-r-0 title-margin-right">
         <div class="page-header">
             <div class="page-title">
-                <h1>بەکارهێنەرەکان</h1>
-            </div>
-        </div>
-    </div>
-    <!-- /# column -->
-    <div class="col-lg-4 p-l-0 title-margin-left">
-        <div class="page-header">
-            <div class="page-title">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">سەرەکی</a></li>
-                    <li class="breadcrumb-item active">بەکارهێنەرەکان</li>
-                </ol>
+                <h1>زیادکردنی بەکارهێنەر</h1>
             </div>
         </div>
     </div>
@@ -65,6 +38,7 @@ if(isset($_POST['success'])){
 <section id="main-content">
         <div class="col-lg-6 mx-auto">
             <div class="card shadow">
+            <span id="msg"></span>
                 <div class="form-group">
                     <label for="">وێنە</label>
                     <input type="file"  id="image" class="form-control" multiple>
@@ -97,11 +71,15 @@ if(isset($_POST['success'])){
                     </div>
                 <div class="form-group">
                         <label for="">ڕۆڵ</label>
-                        <select  id="role" class="form-control">
+                        <select class="form-control" id="role">
                             <option value="">ڕۆڵ</option>
-                            <option value="0">Super Admin</option>
-                            <option value="1">Admin</option>
-                            <option value="2">Cashier</option>
+                            <?php
+                                $roles=Role::find_all();
+                                foreach($roles as $role){
+                                    if($role->recycle==0){
+                            ?>
+                            <option value="<?php echo $role->id; ?>"><?php echo $role->name; ?></option>
+                            <?php }}?>
                         </select>
                     </div>
                     <div class="form-group text-center">

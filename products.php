@@ -2,14 +2,9 @@
 <?php include 'includes/header.php'; ?>
 <?php
 if(isset($_GET['id'])){
-        $user=User::find_by_id($_GET['id']);
-        $user->recycle=1;
-        if($user->update()){  
-            echo "سڕایەوە";
-        }else{
-            echo "نەسڕایەوە";
-    
-        }
+        $product=Product::find_by_id($_GET['id']);
+        $product->recycle=1;
+        $product->update();
     }
 ?>
 <!-- sidebar -->
@@ -24,11 +19,11 @@ if(isset($_GET['id'])){
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>بەڕێوبەرە سەرەکییەکان</h1>
+                                <h1>بەرهەمەکان</h1>
                             </div>
                         </div>
                     </div>
-        
+
                 </div>
                 <!-- /# row -->
                 <section id="main-content">
@@ -42,38 +37,42 @@ if(isset($_GET['id'])){
                                             <thead>
                                                 <tr>
                                                     <th>زنجیرە</th>
+                                                    <th>کۆد</th>
                                                     <th>ناو</th>
-                                                    <th>ئیمەیڵ</th>
-                                                    <th>ژ.مۆبایل</th>
+                                                    <th>جۆر</th>
+                                                    <th>کۆمپانیا</th>
+                                                    <th>ب.دەرچوون</th>
+                                                    <th>ب.بەسەرچوون</th>
+                                                    <th>نرخ</th>
                                                     <th>زیادکراوە لە لایەن</th>
                                                     <th>کردار</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php 
-                                                $users = User::find_all();
+                                                $products = Product::find_all();
                                                 $a=1;
-                                                foreach($users as $user){
-                                                    if($user->recycle==0 && $user->role==1){
+                                                foreach($products as $product){
+                                                    if($product->recycle==0){
                                                 ?>
-                                                <tr id="tr_user_<?php echo $user->id; ?>">
+                                                <tr id="tr_product_<?php echo $product->id; ?>">
                                                     <td><?php echo $a++; ?></td>
-                                                    <td><?php echo htmlentities($user->first_name.' '.$user->last_name,ENT_QUOTES,'UTF-8'); ?></td>
-                                                    <td><?php echo htmlentities($user->email,ENT_QUOTES,'UTF-8'); ?></td>
-                                                    <td><?php echo htmlentities($user->phone,ENT_QUOTES,'UTF-8'); ?></td>
+                                                    <td><?php echo htmlentities($product->code,ENT_QUOTES,'UTF-8'); ?></td>
+                                                    <td><?php echo htmlentities($product->name,ENT_QUOTES,'UTF-8'); ?></td>
+                                                    <td><?php echo htmlentities($product->category,ENT_QUOTES,'UTF-8'); ?></td>
+                                                    <td><?php echo htmlentities($product->company,ENT_QUOTES,'UTF-8'); ?></td>
+                                                    <td><?php echo htmlentities($product->manufacture_date,ENT_QUOTES,'UTF-8'); ?></td>
+                                                    <td><?php echo htmlentities($product->expire_date,ENT_QUOTES,'UTF-8'); ?></td>
+                                                    <td><?php echo htmlentities($product->price,ENT_QUOTES,'UTF-8'); ?></td>
                                                     <td><?php
-                                                    if(!empty($user->addedby)){
-                                                        $addedby=User::find_by_id($user->addedby);
+                                                        $addedby=User::find_by_id($product->addedby);
                                                         echo htmlentities($addedby->first_name.' '.$addedby->last_name,ENT_QUOTES,'UTF-8');
-                                                    }else{
-                                                        echo "";
-                                                    }
-                                                    ?> </td>
+                                                    ?></td>
                                                     <td>
-                                                        <button type="button" onclick="userUpdate(<?php echo $user->id; ?>)" class="btn btn-warning" title="دەستکاریکردن">
+                                                        <button type="button" onclick="productUpdate(<?php echo $product->id; ?>)" class="btn btn-warning" title="دەستکاریکردن">
                                                             <span class="ti-pencil-alt"></span>
                                                         </button>
-                                                        <button type="button"  class="btn btn-secondary " onclick="userRecycle(<?php echo $user->id; ?>)"
+                                                        <button type="button"  class="btn btn-secondary " onclick="productRecycle(<?php echo $product->id; ?>)"
                                                         title="ناردنی بۆ بەشی سڕاوەکان">
                                                             <span class="ti-archive"></span>
                                                         </button>

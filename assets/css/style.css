@@ -89,6 +89,7 @@ p,input,textarea{
 ------------------*/
 /*    Brand color
 ----------------------*/
+
 /*----------------font-------------------*/
 .icon-name {
   color: #000;
@@ -234,7 +235,7 @@ span.badge {
 .vtabs .tabs-vertical li .nav-link {
   border: 0 none;
   border-radius: 4px 0 0 4px;
-  color: #263238;
+  color: #343957;
   margin-bottom: 10px;
 }
 .vtabs .tab-content {
