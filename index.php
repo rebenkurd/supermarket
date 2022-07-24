@@ -13,7 +13,7 @@
 <div class="content-wrap">
         <div class="main">
             <div class="container-fluid">
-                <div class="row">
+            <div class="row">
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
@@ -87,7 +87,6 @@
                             </div>
                         </div>
                     </div>
-
 					<div class="row">
                         <!-- /# column -->
                         <div class="col-lg-12">
@@ -218,7 +217,7 @@
                     </div>
 					
                 </section>
-				</div>
+			</div>
 			<!-- /# row -->
         </div>
     </div>

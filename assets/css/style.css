@@ -733,6 +733,11 @@ a.dt-button.active:not(.disabled) {
   text-align: center;
   width: 250px;
   transition: width 300ms ease-in-out;
+  overflow: hidden;
+}
+.logo a img {
+  width: 80px;
+  height: 80px;
 }
 .logo span {
   color: rgba(160, 180, 200, 0.85);
@@ -740,7 +745,11 @@ a.dt-button.active:not(.disabled) {
   font-weight: 700;
 }
 .sidebar-hide .logo {
-  width: 0;
+  width: 60px;
+}
+.sidebar-hide .logo a img{
+  width: 50px;
+  height: 50px;
 }
 .sidebar-hide .logo span {
   display: none;
@@ -765,6 +774,7 @@ a.dt-button.active:not(.disabled) {
 .header-icon:hover {
   background: rgba(255, 255, 255, 0.3);
 }
+
 .header-icon.active .drop-down {
   visibility: visible;
   opacity: 1;
@@ -933,6 +943,11 @@ a.dt-button.active:not(.disabled) {
 @media (min-width: 320px) and (max-width: 679px) {
   .sidebar {
     top: 50px;
+  }
+
+  .logo a img{
+    width: 50px;
+    height: 50px;
   }
 }
 .map {
@@ -1824,6 +1839,7 @@ footer p {
     display: inline-block;
     width: 100%;
   }
+  
 }
 @media (max-width: 360px) {
   .stat-widget-five .stat-heading {

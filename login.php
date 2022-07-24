@@ -1,3 +1,29 @@
+<?php
+include("configs/init.php");
+
+if($session->is_signed_in()){
+    RedirectTo("index.php");
+}
+
+if(isset($_POST['submit'])){
+    $email=trim($_POST['email']);
+    $password=trim($_POST['password']);
+    
+    // Methode To Check Database User
+    
+    $user_found=User::verify_user($email,$password);
+    
+    if($user_found){
+        $session->login($user_found);
+        RedirectTo("index.php");
+    }else{
+        $the_message="Your password Or Username Are incorrect";
+    }
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -37,14 +63,14 @@
                     <div class="login-content radius-10 shadow">
                         <div class="login-form">
                             <h4>فۆڕمی چوونەژوورەوە</h4>
-                            <form>
+                            <form action="" method="POST">
                                 <div class="form-group">
                                     <label>ئیمەیڵ</label>
-                                    <input type="email" class="form-control text-right" placeholder="ئیمەیڵەکەت بنووسە">
+                                    <input type="email" name="email" class="form-control text-right" placeholder="ئیمەیڵەکەت بنووسە">
                                 </div>
                                 <div class="form-group">
                                     <label>وشەی تێپەڕ</label>
-                                    <input type="password" class="form-control" placeholder="وشەی تێپەڕەکەت بنووسە">
+                                    <input type="password" name="password" class="form-control" placeholder="وشەی تێپەڕەکەت بنووسە">
                                 </div>
                                 <div class="checkbox">
                                     <label class="pull-right">
@@ -52,7 +78,7 @@
 									</label>
 
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">چوونەژوورەوە</button>
+                                <button type="submit" name="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">چوونەژوورەوە</button>
                                 <div class="register-link m-t-15 text-center">
                                     <p>هەژمارت هەیە؟ <a href="#"> خۆتۆمارکردن</a></p>
                                 </div>
