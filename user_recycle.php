@@ -6,7 +6,7 @@
 if(isset($_GET['id'])){
         $user=User::find_by_id($_GET['id']);
         $user->recycle=0;
-        $user->update();
+        $user->save();
     }
 ?>
 

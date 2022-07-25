@@ -4,7 +4,7 @@
 if(isset($_GET['id'])){
         $product=Product::find_by_id($_GET['id']);
         $product->recycle=1;
-        $product->update();
+        $product->save();
     }
 ?>
 <!-- sidebar -->

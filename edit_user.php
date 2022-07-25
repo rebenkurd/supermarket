@@ -16,7 +16,7 @@ if(!empty($_GET['uid'])){
     $user->role = $_GET['role'];
     $user->addedby = $_SESSION['user_id'];
     $user->updated_at=date("Y-m-d H:i:s");   
-    $user->update();
+    $user->save();
 }
 ?>
 
@@ -45,7 +45,6 @@ if(!empty($_GET['uid'])){
                         <div class="col-lg-6 mx-auto">
                             <div class="card shadow">
                                 <span id="msg"></span>
-                                <input type="hidden" id="user_id" value="<?php echo $user->id;?>">
                                 <div class="row">
                                     <div class="col-lg-6">
                                     <div class="form-group">
@@ -82,7 +81,7 @@ if(!empty($_GET['uid'])){
                         </select>
                                     </div>
                                     <div class="form-group text-center">
-                                        <button type="button" id="edit_user" class="btn btn-success w-25">پاشەکەوتکرده</button>
+                                        <button type="button" onclick="editUser(<?php echo $user->id;?>)" class="btn btn-success w-25">پاشەکەوتکرده</button>
                                     </div>
                             </div>
                             <!-- /# card -->

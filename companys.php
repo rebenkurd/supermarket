@@ -4,7 +4,7 @@
 if(isset($_GET['id'])){
         $company=Company::find_by_id($_GET['id']);
         $company->recycle=1;
-        $company->update();
+        $company->save();
     }
 ?>
 <!-- sidebar -->

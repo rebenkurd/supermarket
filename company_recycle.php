@@ -2,9 +2,9 @@
 <?php include 'includes/header.php'; ?>
 <?php
 if(isset($_GET['id'])){
-        $user=User::find_by_id($_GET['id']);
-        $user->recycle=1;
-        $user->save();
+        $company=Company::find_by_id($_GET['id']);
+        $company->recycle=0;
+        $company->save();
     }
 ?>
 <!-- sidebar -->
@@ -19,11 +19,11 @@ if(isset($_GET['id'])){
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>بەڕێوبەرە سەرەکییەکان</h1>
+                                <h1>کۆمپانیا سڕاوەکان</h1>
                             </div>
                         </div>
                     </div>
-        
+
                 </div>
                 <!-- /# row -->
                 <section id="main-content">
@@ -38,41 +38,32 @@ if(isset($_GET['id'])){
                                                 <tr>
                                                     <th>زنجیرە</th>
                                                     <th>ناو</th>
-                                                    <th>ئیمەیڵ</th>
-                                                    <th>ژ.مۆبایل</th>
                                                     <th>زیادکراوە لە لایەن</th>
                                                     <th>کردار</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php 
-                                                $users = User::find_all();
+                                                $companys = Company::find_all();
                                                 $a=1;
-                                                foreach($users as $user){
-                                                    if($user->recycle==0 && $user->role==1){
+                                                foreach($companys as $company){
+                                                    if($company->recycle==1){
                                                 ?>
-                                                <tr id="tr_user_<?php echo $user->id; ?>">
+                                                <tr id="tr_company_<?php echo $company->id; ?>">
                                                     <td><?php echo $a++; ?></td>
-                                                    <td><?php echo htmlentities($user->first_name.' '.$user->last_name,ENT_QUOTES,'UTF-8'); ?></td>
-                                                    <td><?php echo htmlentities($user->email,ENT_QUOTES,'UTF-8'); ?></td>
-                                                    <td><?php echo htmlentities($user->phone,ENT_QUOTES,'UTF-8'); ?></td>
+                                                    <td><?php echo htmlentities($company->name,ENT_QUOTES,'UTF-8'); ?></td>
                                                     <td><?php
-                                                    if(!empty($user->addedby)){
-                                                        $addedby=User::find_by_id($user->addedby);
+                                                        $addedby=User::find_by_id($company->addedby);
                                                         echo htmlentities($addedby->first_name.' '.$addedby->last_name,ENT_QUOTES,'UTF-8');
-                                                    }else{
-                                                        echo "";
-                                                    }
-                                                    ?> </td>
+                                                    ?></td>
                                                     <td>
-                                                        <button type="button" onclick="userUpdate(<?php echo $user->id; ?>)" class="btn btn-warning" title="دەستکاریکردن">
-                                                            <span class="ti-pencil-alt"></span>
+                                                        <button type="button" onclick="companyRecovery(<?php echo $company->id; ?>)" class="btn btn-success" title="گەڕاندنەوە">
+                                                            <span class="ti-reload"></span>
                                                         </button>
-                                                        <button type="button"  class="btn btn-secondary " onclick="userRecycle(<?php echo $user->id; ?>)"
-                                                        title="ناردنی بۆ بەشی سڕاوەکان">
-                                                            <span class="ti-archive"></span>
+                                                        <button type="button" onclick="companyDelete(<?php echo $company->id; ?>)"  class="btn btn-danger" title="سڕینەوەی بە تەواوی">
+                                                            <span class="ti-trash"></span>
                                                         </button>
-                                                    </td>
+                                                    </td>                  
                                                 </tr>
                                                 <?php } } ?>
                                             </tbody>

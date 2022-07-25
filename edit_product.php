@@ -3,20 +3,23 @@
 <?php include 'includes/header.php'; ?>
 
 <?php
-    $product=Product::find_by_id($_GET['id']);
-if(isset($_POST['uid'])){
-        $product->name = $_POST['name'];
-        $product->code = $_POST['code'];
-        $product->category = $_POST['category'];
-        $product->company = $_POST['company'];
-        $product->quantity = $_POST['quantity'];
-        $product->price = $_POST['price'];
-        $product->description = $_POST['description'];
-        $product->manufacture_date = $_POST['manufacture_date'];
-        $product->expire_date = $_POST['expire_date'];
-        $product->addedby = $_SESSION['user_id'];
-        $product->created_at=date("Y-m-d H:i:s");   
-        $product->update();
+if(!isset($_GET['id'])){
+    RedirectTo('products.php');
+}
+
+if(isset($_GET['pid'])){
+        $product=Product::find_by_id($_GET['pid']);
+        $product->name = $_GET['name'];
+        $product->code = $_GET['code'];
+        $product->category = $_GET['category'];
+        $product->company = $_GET['company'];
+        $product->quantity = $_GET['quantity'];
+        $product->price = $_GET['price'];
+        $product->description = $_GET['description'];
+        $product->manufacture_date = $_GET['manufacture_date'];
+        $product->expire_date = $_GET['expire_date'];
+        $product->updated_at=date("Y-m-d H:i:s");   
+        $product->save();
     }
 ?>
 <!-- sidebar -->
@@ -31,7 +34,7 @@ if(isset($_POST['uid'])){
     <div class="col-lg-8 p-r-0 title-margin-right">
         <div class="page-header">
             <div class="page-title">
-                <h1>زیادکردنی بەرهەم</h1>
+                <h1>دەستکاریکردنی بەرهەم</h1>
             </div>
         </div>
     </div>
@@ -39,6 +42,7 @@ if(isset($_POST['uid'])){
 </div>
 <!-- /# row -->
 <section id="main-content">
+    <?php $product=Product::find_by_id($_GET['id']); ?>
         <div class="col-lg-6 mx-auto">
             <div class="card shadow">
             <span id="msg"></span>
@@ -89,7 +93,7 @@ if(isset($_POST['uid'])){
                     <div class="col-lg-6">
                     <div class="form-group">
                         <label for="">کۆمپانیا</label>
-                        <select class="form-control" id="category">
+                        <select class="form-control" id="company">
                             <option value="">جۆر</option>
                             <?php
                                 $companys=Company::find_all();
@@ -121,7 +125,7 @@ if(isset($_POST['uid'])){
                         <textarea  id="description" class="form-control" cols="30" rows="10"><?php echo $product->description; ?></textarea>
                     </div>
                     <div class="form-group text-center">
-                    <button type="submit" onclick="editProduct(<?php echo $product->id; ?>)" class="btn btn-success w-25">زیادکردن</button>
+                    <button type="button" onclick="editProduct(<?php echo $product->id; ?>)" class="btn btn-success w-25">زیادکردن</button>
                     </div>
             </div>
             <!-- /# card -->

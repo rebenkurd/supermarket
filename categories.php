@@ -4,7 +4,7 @@
 if(isset($_GET['id'])){
         $category=Category::find_by_id($_GET['id']);
         $category->recycle=1;
-        $category->update();
+        $category->save();
     }
 ?>
 <!-- sidebar -->
