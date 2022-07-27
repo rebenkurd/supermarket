@@ -171,6 +171,15 @@ function addProduct(){
                 expire_date: [exy,exm,exd].join('-'),
                 manufacture_date: [mfy,mfm,mfd].join('-'),
             },success: function(){
+                $('#name').val('');
+                $('#category').val('');
+                $('#company').val('');
+                $('#code').val('');
+                $('#price').val('');
+                $('#quantity').val('');
+                $('#description').val('');
+                $('#expire_date').val('');
+                $('#manufacture_date').val('');
                 $('#msg').html('<div class="alert alert-success">زانیارییەکان زیادکرا</div>');
             }
     });
@@ -295,6 +304,8 @@ function addCategory(){
             name: Name,
             description: Description,
         },success: function(){
+            $('#name').val('');
+            $('#description').val('');  
             $('#msg').html('<div class="alert alert-success">زانیارییەکان زیادکرا</div>');
         }
 });
@@ -384,6 +395,8 @@ function addCompany(){
             name: Name,
             description: Description,
         },success: function(data){
+            $('#name').val('');
+            $('#description').val(''); 
             $('#msg').html('<div class="alert alert-success">زانیارییەکان زیادکرا</div>');
         }
 });
@@ -459,3 +472,77 @@ function companyDelete(company_id) {
         }
 });
 }
+
+
+
+
+function selectedCategory(){
+    var category_id=$('#category_id').val();
+    $.ajax({
+        url: 'sale.php',
+        type: 'GET',
+        data: {
+            category_id:category_id
+        },success: function(data){
+            $('#product').html(data);
+        }
+});
+}
+// function addSale(){
+//     var product_id=$('#product').val();
+//     var Quantity=$('#quantity').val();
+//     $.ajax({
+//         url: 'sale.php',
+//         type: 'GET',
+//         data: {
+//             product_id:product_id,
+//             quantity: 0,
+//         },success: function(data){
+//             // location.reload();
+//             console.log(data);
+            
+//         }
+//     });
+// }
+
+function saleDelete(id) {
+    $.ajax({
+        url: 'delete_sale.php',
+        type: 'GET',
+        data: {
+            id:id
+        },success: function(){
+            $('#tr_sale_'+id).remove();
+        }
+});
+}
+function clearAllSale() {
+    $.ajax({
+        url: 'sale.php',
+        type: 'GET',
+        data: {
+            delete:true
+        },success: function(){
+            $('.tr_sale').remove();
+        }
+});
+}
+
+var arg = {
+    resultFunction: function(result) {
+        var product_code=result.code;
+        var sale_id=$('sale_id')
+        $.ajax({
+            url: 'sale.php',
+            type: 'GET',
+            data: {
+                product_code:product_code,
+            },success: function(data){
+                location.reload();
+                // console.log(data);
+                
+            }
+        });
+    }
+};
+$("canvas").WebCodeCamJQuery(arg).data().plugin_WebCodeCamJQuery.play();

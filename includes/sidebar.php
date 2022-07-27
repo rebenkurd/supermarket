@@ -5,6 +5,7 @@
 	<div class="logo"><a href="index.php">
 			<img src="assets/images/logo.png" alt="" /></a></div>
 			<li><a href="index.php"><i class="ti-home"></i>سەرەکی</a></li>
+			<li><a href="sale.php"><i class="ti-shopping-cart"></i>فڕؤشتن</a></li>
 	<li><a class="sidebar-sub-toggle"><i class="fa fa-users" aria-hidden="true"></i> بەکارهێنەرەکان <span
 				class="sidebar-collapse-icon ti-angle-down"></span></a>
 		<ul>

@@ -21,7 +21,7 @@ if(isset($_POST['success'])){
 ?>
 <!-- sidebar -->
 <?php include 'includes/sidebar.php'; ?>
-<!-- header -->`
+<!-- header -->
 <?php include 'includes/top_header.php'; ?>
 <!-- content -->
 <div class="content-wrap">
