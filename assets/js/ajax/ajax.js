@@ -531,7 +531,6 @@ function clearAllSale() {
 var arg = {
     resultFunction: function(result) {
         var product_code=result.code;
-        var sale_id=$('sale_id')
         $.ajax({
             url: 'sale.php',
             type: 'GET',
@@ -545,4 +544,9 @@ var arg = {
         });
     }
 };
-$("canvas").WebCodeCamJQuery(arg).data().plugin_WebCodeCamJQuery.play();
+var arg = {
+    resultFunction: function(result) {
+        $('#code').val(result.code);
+    }
+};
+$('canvas').WebCodeCamJQuery(arg).data().plugin_WebCodeCamJQuery.play()

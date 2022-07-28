@@ -21,10 +21,13 @@ if(isset($_GET['product_code'])){
 $sale=new Sale();
 $product=Product::find_by_code($_GET['product_code']);
 if($product){
-    if($sale->pr_code==$_GET['product_code']){
-        $sale->pr_quantity=1;
-        
+$saleUp=Sale::find_by_product_id($product->id);
+    if($saleUp->pr_id==$product->id){
+        $saleUp->pr_quantity++;
+        $saleUp->total_price=$saleUp->pr_quantity*$saleUp->pr_price;
+        $saleUp->save();
     }else{
+    $sale->pr_id=$product->id;
     $sale->pr_code=$product->code;
     $sale->pr_name=$product->name;
     $sale->pr_price=$product->price;
