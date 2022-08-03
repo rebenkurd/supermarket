@@ -29,13 +29,22 @@ if(isset($_GET['id'])){
                 <section id="main-content">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="card">
+                        <div class="card">
                                 <div class="bootstrap-data-table-panel">
                                     <div class="table-responsive">
-                                        
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <a href="add_product.php" title="زیادکردنی بەرهەم " class="btn btn-primary"><i class="ti-plus"></i></a>
+                                                <button type="button" onclick="multiRecoveryProduct()" class="btn btn-success"><i class="ti-reload" title="گەڕاندنەوە"></i></button>
+                                                <button type="button" onclick="multiDeleteProduct()" class="btn btn-danger"><i class="ti-trash" title="سڕینەوە"></i></button>
+                                            </div>
+                                        </div>
                                         <table class="table table-striped table-bordered" id="bootstrap-data-table">
                                             <thead>
                                                 <tr>
+                                                    <th>
+                                                    <input type="checkbox" id="checkall">
+                                                    </th>
                                                     <th>زنجیرە</th>
                                                     <th>کۆد</th>
                                                     <th>ناو</th>
@@ -56,6 +65,14 @@ if(isset($_GET['id'])){
                                                     if($product->recycle==1){
                                                 ?>
                                                 <tr id="tr_product_<?php echo $product->id; ?>">
+                                                    <td>
+                                                        <input type="checkbox" 
+                                                        id="sel" 
+                                                        class="checkitem"
+                                                        name="sel[]" 
+                                                        value="<?php 
+                                                        echo $product->id; ?>">
+                                                    </td>
                                                     <td><?php echo $a++; ?></td>
                                                     <td><?php echo htmlentities($product->code,ENT_QUOTES,'UTF-8'); ?></td>
                                                     <td><?php echo htmlentities($product->name,ENT_QUOTES,'UTF-8'); ?></td>
@@ -63,13 +80,9 @@ if(isset($_GET['id'])){
                                                     <td><?php echo htmlentities($product->company,ENT_QUOTES,'UTF-8'); ?></td>
                                                     <td><?php echo htmlentities($product->manufacture_date,ENT_QUOTES,'UTF-8'); ?></td>
                                                     <td><?php echo htmlentities($product->expire_date,ENT_QUOTES,'UTF-8'); ?></td>
-                                                    <td><?php echo htmlentities($product->price,ENT_QUOTES,'UTF-8'); ?></td>
+                                                    <td><?php echo htmlentities(number_format($product->price,0),ENT_QUOTES,'UTF-8'); ?></td>
                                                     <td><?php
                                                         $addedby=User::find_by_id($product->addedby);
-                                                        echo htmlentities($addedby->first_name.' '.$addedby->last_name,ENT_QUOTES,'UTF-8');
-                                                    ?></td>
-                                                    <td><?php
-                                                        $addedby=User::find_by_id($user->addedby);
                                                         echo htmlentities($addedby->first_name.' '.$addedby->last_name,ENT_QUOTES,'UTF-8');
                                                     ?></td>
                                                     <td>

@@ -32,10 +32,18 @@ if(isset($_GET['id'])){
                             <div class="card">
                                 <div class="bootstrap-data-table-panel">
                                     <div class="table-responsive">
-                                        
+                                    <div class="row">
+                                            <div class="col-lg-3">
+                                                <a href="add_user.php" class="btn btn-primary" title="زیادکردنی بەکارهێنەر"><i class="ti-plus"></i></a>
+                                                <button type="button" onclick="multiRecycleUser()" title="ناردنی بۆ بەشی سڕاوەکان" class="btn btn-secondary"><i class="ti-reload"></i></button>
+                                            </div>
+                                        </div>
                                         <table class="table table-striped table-bordered" id="bootstrap-data-table">
                                             <thead>
                                                 <tr>
+                                                <th>
+                                                    <input type="checkbox" id="checkall">
+                                                    </th>
                                                     <th>زنجیرە</th>
                                                     <th>ناو</th>
                                                     <th>ئیمەیڵ</th>
@@ -52,6 +60,14 @@ if(isset($_GET['id'])){
                                                     if($user->recycle==0 && $user->role==1){
                                                 ?>
                                                 <tr id="tr_user_<?php echo $user->id; ?>">
+                                                <td>
+                                                        <input type="checkbox" 
+                                                        id="sel" 
+                                                        class="checkitem"
+                                                        name="sel[]" 
+                                                        value="<?php 
+                                                        echo $user->id; ?>">
+                                                    </td>
                                                     <td><?php echo $a++; ?></td>
                                                     <td><?php echo htmlentities($user->first_name.' '.$user->last_name,ENT_QUOTES,'UTF-8'); ?></td>
                                                     <td><?php echo htmlentities($user->email,ENT_QUOTES,'UTF-8'); ?></td>

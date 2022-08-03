@@ -16,8 +16,17 @@
 			<li><a href="user_recycle.php">بەکارهێنەرە سڕاوەکان</a></li>
 		</ul>
 	</li>
-	<li><a class="sidebar-sub-toggle"><i class="ti-package"></i> بەرهەمەکان <span
-				class="sidebar-collapse-icon ti-angle-down"></span></a>
+	<li><a class="sidebar-sub-toggle"><i class="ti-package"></i> بەرهەمەکان 
+	<?php
+	$product =Product::count_expire_product();
+	if($product>0){
+		echo '<span class="badge badge-danger">'.$product.'</span>';
+	}else{
+		echo '';
+	}
+?>
+	<span class="sidebar-collapse-icon ti-angle-down"></span>
+	</a>
 		<ul>
 			<li><a href="products.php">بینینی بەرهەمەکان</a></li>
 			<li><a href="add_product.php">زیادکردنی بەرهەم</a></li>

@@ -28,6 +28,21 @@ class Product extends Db_Object{
     }
 
 
+    public static function count_expire_product(){
+        global $db;
+        $sql="SELECT COUNT(*) FROM ".static::$db_table." WHERE expire_date <= NOW() AND recycle=0";
+        $result=$db->query($sql);
+        $row=mysqli_fetch_array($result);
+        return array_shift($row);
+    }
+
+
+
+
+
+
+
+
 }
 
 

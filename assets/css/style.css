@@ -89,21 +89,66 @@ p,input,textarea{
 ------------------*/
 /*    Brand color
 ----------------------*/
-
+.pointer{
+  cursor: pointer !important;
+  transition: .3s;
+}
 /*----------------font-------------------*/
 .icon-name {
   color: #000;
 }
 /*  Opensans
 --------------- */
+
+/* search */
+
+#search-result {
+  display: none;
+  position: absolute;
+  top: 100px;
+  right: 0;
+  transform: translateY(-25px);
+  width: 100%;
+  z-index:9999 !important;
+}
+
+#search-result .card-body{
+  margin: 0!important;
+  height: 250px;
+  overflow-y: auto;
+}
+
+.search-item .search-item-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  margin-left: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.search-item .search-item-image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.search-item .search-item-body {
+  width:calc(100% - 150px) ;
+}
+.search-item .search-item-price {
+  width: 100px;
+}
+
+
 .card-body {
   padding: 0;
 }
+
 .card {
   background: #ffffff;
   margin: 7.5px 0;
   padding: 20px;
-  border: 1px solid #e7e7e7;
+  border: 1px solid #e7e7e7 ;
   border-radius: 3px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }

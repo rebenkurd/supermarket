@@ -66,6 +66,17 @@
     });
 
 
+    $("#checkall").change(function(){
+        $(".checkitem").prop("checked",$(this).prop("checked"));
+    });
+    $(".checkitem").change(function(){
+        if($(this).prop("#checkall")==false){
+            $("#checkall").prop("checked",false);
+        }
+        if($(".checkitem:checked").length==$(".checkitem")==length){
+            $("#checkall").prop("checked",false);
+        }
+    });
     
 
 

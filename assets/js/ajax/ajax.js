@@ -170,7 +170,7 @@ function addProduct(){
                 description: Description,
                 expire_date: [exy,exm,exd].join('-'),
                 manufacture_date: [mfy,mfm,mfd].join('-'),
-            },success: function(){
+            },success: function(data){
                 $('#name').val('');
                 $('#category').val('');
                 $('#company').val('');
@@ -181,6 +181,7 @@ function addProduct(){
                 $('#expire_date').val('');
                 $('#manufacture_date').val('');
                 $('#msg').html('<div class="alert alert-success">زانیارییەکان زیادکرا</div>');
+                console.log(data);
             }
     });
         }
@@ -477,33 +478,33 @@ function companyDelete(company_id) {
 
 
 function selectedCategory(){
-    var category_id=$('#category_id').val();
+    var category_id=$('#categories').val();
     $.ajax({
         url: 'sale.php',
         type: 'GET',
         data: {
             category_id:category_id
         },success: function(data){
-            $('#product').html(data);
+            $('#products').html(data);
         }
 });
 }
-// function addSale(){
-//     var product_id=$('#product').val();
-//     var Quantity=$('#quantity').val();
-//     $.ajax({
-//         url: 'sale.php',
-//         type: 'GET',
-//         data: {
-//             product_id:product_id,
-//             quantity: 0,
-//         },success: function(data){
-//             // location.reload();
-//             console.log(data);
+function addSaleProduct(){
+    var product_code=$('#products').val();
+    var Quantity=$('#quantity').val();
+    $.ajax({
+        url: 'sale.php',
+        type: 'GET',
+        data: {
+            product_code:product_code,
+            quantity: Quantity,
+        },success: function(data){
+            location.reload();
+            // console.log(data);
             
-//         }
-//     });
-// }
+        }
+    });
+}
 
 function saleDelete(id) {
     $.ajax({
@@ -544,9 +545,227 @@ var arg = {
         });
     }
 };
-var arg = {
-    resultFunction: function(result) {
-        $('#code').val(result.code);
+$('#canvas').WebCodeCamJQuery(arg).data().plugin_WebCodeCamJQuery.play()
+
+
+
+
+function multiRecycleProduct(){
+    var selected=$('#sel[name="sel[]"]').filter(':checked');
+    var selected_id=new Array();
+    selected.each(function(){
+        selected_id.push($(this).val());
+    });
+    for (let i = 0; i < selected_id.length; i++) {
+    $.ajax({
+        url: 'products.php',
+        type: 'GET',
+        data: {
+            id:selected_id[i]
+        },success: function(data){
+            // location.reload();
+            // console.log(data);
+            $("#tr_product_"+selected_id[i]).remove();
+        }
+    })
+}
+}
+function multiRecoveryProduct(){
+    var selected=$('#sel[name="sel[]"]').filter(':checked');
+    var selected_id=new Array();
+    selected.each(function(){
+        selected_id.push($(this).val());
+    });
+    for (let i = 0; i < selected_id.length; i++) {
+    $.ajax({
+        url: 'product_recycle.php',
+        type: 'GET',
+        data: {
+            id:selected_id[i]
+        },success: function(data){
+            // location.reload();
+            // console.log(data);
+            $("#tr_product_"+selected_id[i]).remove();
+        }
+    })
+}
+}
+function multiDeleteProduct(){
+    var selected=$('#sel[name="sel[]"]').filter(':checked');
+    var selected_id=new Array();
+    selected.each(function(){
+        selected_id.push($(this).val());
+    });
+    for (let i = 0; i < selected_id.length; i++) {
+    $.ajax({
+        url: 'delete_product.php',
+        type: 'GET',
+        data: {
+            id:selected_id[i]
+        },success: function(data){
+            // location.reload();
+            // console.log(data);
+            $("#tr_product_"+selected_id[i]).remove();
+        }
+    })
+}
+}
+function multiRecycleUser(){
+    var selected=$('#sel[name="sel[]"]').filter(':checked');
+    var selected_id=new Array();
+    selected.each(function(){
+        selected_id.push($(this).val());
+    });
+    for (let i = 0; i < selected_id.length; i++) {
+    $.ajax({
+        url: 'users.php',
+        type: 'GET',
+        data: {
+            id:selected_id[i]
+        },success: function(data){
+            // location.reload();
+            // console.log(data);
+            $("#tr_user_"+selected_id[i]).remove();
+        }
+    })
+}
+}
+function multiRecoveryUser(){
+    var selected=$('#sel[name="sel[]"]').filter(':checked');
+    var selected_id=new Array();
+    selected.each(function(){
+        selected_id.push($(this).val());
+    });
+    for (let i = 0; i < selected_id.length; i++) {
+    $.ajax({
+        url: 'user_recycle.php',
+        type: 'GET',
+        data: {
+            id:selected_id[i]
+        },success: function(data){
+            // location.reload();
+            // console.log(data);
+            $("#tr_user_"+selected_id[i]).remove();
+        }
+    })
+}
+}
+function multiDeleteUser(){
+    var selected=$('#sel[name="sel[]"]').filter(':checked');
+    var selected_id=new Array();
+    selected.each(function(){
+        selected_id.push($(this).val());
+    });
+    for (let i = 0; i < selected_id.length; i++) {
+    $.ajax({
+        url: 'delete_user.php',
+        type: 'GET',
+        data: {
+            id:selected_id[i]
+        },success: function(data){
+            // location.reload();
+            // console.log(data);
+            $("#tr_user_"+selected_id[i]).remove();
+        }
+    })
+}
+}
+
+function saveAllProduct(){
+    var pr_id=[];
+    var pr_code=[];
+    var pr_name=[];
+    var pr_quantity=[];
+    var pr_price=[];
+    var total_price=[];
+    $('#pr_id[name="pr_id[]"]').each(function(){
+        pr_id.push($(this).val());
+    });
+    $('#pr_name[name="pr_name[]"]').each(function(){
+        pr_name.push($(this).val());
+    });
+    $('#pr_code[name="pr_code[]"]').each(function(){
+        pr_code.push($(this).val());
+    });
+    $('#pr_quantity[name="pr_quantity[]"]').each(function(){
+        pr_quantity.push($(this).val());
+    });
+    $('#pr_price[name="pr_price[]"]').each(function(){
+        pr_price.push($(this).val());
+    });
+    $('#total_price[name="total_price[]"]').each(function(){
+        total_price.push($(this).val());
+    });
+    for (let i = 0; i < pr_id.length; i++) {
+    $.ajax({
+        url: 'sale.php',
+        type: 'POST',
+        data: {
+            success:true,
+            pr_id:pr_id[i],
+            pr_code:pr_code[i],
+            pr_name:pr_name[i],
+            pr_quantity:pr_quantity[i],
+            pr_price:pr_price[i],
+            total_price:total_price[i],
+        },success: function(data){
+            location.reload();
+        }
+    })
+}
+}
+
+function addItem(product_code){
+    $.ajax({
+        url: 'sale.php',
+        type: 'GET',
+        data: {
+            success:true,
+            product_code:product_code,
+        },success: function(data){
+            location.reload();
+        }
+    })
+}
+function Qty(){
+    var qty=$('#pr_quantity').val();
+    var product_code=$('#pr_code').val();
+        $.ajax({
+            url: 'sale.php',
+            type: 'GET',
+            data: {
+                inc:true,
+                pr_quantity:qty,
+                product_code:product_code,
+            },success: function(data){
+                location.reload();
+
+            }
+        })    
+
+}
+
+
+
+
+function search(query){
+    if(query != ''){
+        $.ajax({
+            url: 'search.php',
+            type: 'POST',
+            data: {
+                query:query
+            },success: function(data){
+                $('#search-result').css('display','block');
+                $('#result').html(data);
+                // alert(data);
+            }
+        })  
+        }else{
+        $('#result').html(data);
     }
-};
-$('canvas').WebCodeCamJQuery(arg).data().plugin_WebCodeCamJQuery.play()
+}
+
+function searchClose(){
+    $('#search-result').css('display','none');
+}

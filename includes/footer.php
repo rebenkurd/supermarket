@@ -8,5 +8,6 @@
     <script src="assets/js/lib/scanner/qrcodelib.js"></script>
     <script src="assets/js/lib/scanner/webcodecamjquery.js"></script>
     <script src="assets/js/ajax/ajax.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>

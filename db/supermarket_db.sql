@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2022 at 10:31 PM
+-- Generation Time: Aug 03, 2022 at 01:19 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -87,17 +87,32 @@ INSERT INTO `company` (`id`, `name`, `description`, `recycle`, `addedby`, `creat
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_report`
+-- Table structure for table `orders`
 --
 
-CREATE TABLE `order_report` (
+CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `product_name` varchar(255) NOT NULL,
-  `total_items` int(11) NOT NULL,
-  `cost_per_unit` decimal(10,0) NOT NULL,
-  `total_cost` decimal(10,0) NOT NULL
+  `pr_id` int(11) NOT NULL,
+  `pr_code` varchar(255) NOT NULL,
+  `pr_name` varchar(255) NOT NULL,
+  `pr_quantity` int(11) NOT NULL,
+  `pr_price` int(11) NOT NULL,
+  `total_price` int(11) NOT NULL,
+  `recycle` tinyint(1) NOT NULL,
+  `saledby` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `pr_id`, `pr_code`, `pr_name`, `pr_quantity`, `pr_price`, `total_price`, `recycle`, `saledby`, `created_at`, `updated_at`) VALUES
+(52, 17, '', '', 0, 0, 0, 0, '1', '2022-08-02 00:15:50', '0000-00-00 00:00:00'),
+(53, 17, '', '', 0, 0, 0, 0, '1', '2022-08-02 00:16:03', '0000-00-00 00:00:00'),
+(54, 0, '', '', 0, 0, 0, 0, '1', '2022-08-02 00:16:59', '0000-00-00 00:00:00'),
+(55, 0, '', '', 0, 0, 0, 0, '1', '2022-08-02 00:17:08', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -127,10 +142,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `code`, `name`, `category`, `price`, `quantity`, `company`, `description`, `manufacture_date`, `expire_date`, `recycle`, `addedby`, `created_at`, `updated_at`) VALUES
-(14, '123', 'نەستەلەی پسکیتی بچوک', 12, '1750', 50, 11, '', '2022-07-01', '2022-08-01', 0, '1', '2022-07-25 16:16:43', '0000-00-00 00:00:00'),
-(15, '98', 'برنجی کیسی ١٠ کگم', 5, '10000', 100, 7, '', '2022-07-01', '2022-08-01', 0, '1', '2022-07-25 16:18:17', '0000-00-00 00:00:00'),
-(16, '44', 'سنگی مریشک ١ کگم', 6, '5000', 95, 6, '', '2022-07-01', '2022-11-01', 0, '1', '2022-07-25 16:20:13', '0000-00-00 00:00:00'),
-(17, 'http://formula.id', 'هەویری ددان', 9, '2000', 40, 1, '', '2022-01-01', '2022-08-01', 0, '1', '2022-07-27 16:15:34', '2022-07-27 17:29:05');
+(17, 'http://formula.id', 'هەویری ددان', 9, '2000', 40, 1, '', '2022-01-01', '2022-08-01', 0, '1', '2022-07-27 16:15:34', '2022-07-27 17:29:05'),
+(25, '8991102100434', 'فڵچەی ددان', 9, '2500', 45, 1, '', '2022-07-28', '2022-09-29', 0, '1', '2022-07-28 17:47:18', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -162,6 +175,7 @@ INSERT INTO `role` (`id`, `name`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `sale` (
   `id` int(11) NOT NULL,
+  `pr_id` int(11) NOT NULL,
   `pr_code` varchar(255) NOT NULL,
   `pr_name` varchar(255) NOT NULL,
   `pr_quantity` int(11) NOT NULL,
@@ -203,7 +217,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `role`, `phone`, `recycle`, `addedby`, `image`, `type_image`, `tmp_image`, `size_image`, `created_at`, `updated_at`) VALUES
-(1, 'ڕێبین', 'ڕفیق', 'rebinrafiq980@gmail.com', '123', 1, '123 456 7890', 0, '1', '', '', '', '', '2022-07-24 23:10:57', '2022-07-25 00:01:03');
+(1, 'ڕێبین', 'ڕفیق', 'rebinrafiq980@gmail.com', '123', 1, '123 456 7890', 0, '1', '', '', '', '', '2022-07-24 23:10:57', '2022-07-25 00:01:03'),
+(31, 'ff', 'ff', 'ff', '', 2, '', 0, '', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -222,9 +237,9 @@ ALTER TABLE `company`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `order_report`
+-- Indexes for table `orders`
 --
-ALTER TABLE `order_report`
+ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -232,8 +247,8 @@ ALTER TABLE `order_report`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `company` (`company`),
-  ADD KEY `category` (`category`);
+  ADD KEY `category` (`category`),
+  ADD KEY `company` (`company`) USING BTREE;
 
 --
 -- Indexes for table `role`
@@ -271,16 +286,16 @@ ALTER TABLE `company`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `order_report`
+-- AUTO_INCREMENT for table `orders`
 --
-ALTER TABLE `order_report`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -292,13 +307,13 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `sale`
 --
 ALTER TABLE `sale`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2147483648;
 
 --
 -- Constraints for dumped tables

@@ -16,7 +16,9 @@ if(isset($_POST['success'])){
         $product->expire_date = $_POST['expire_date'];
         $product->addedby = $_SESSION['user_id'];
         $product->created_at=date("Y-m-d H:i:s");   
-        $product->save();
+        if(!$product->save()){
+            die("error".mysqli_error($db->connection));
+        }
     }
 ?>
 <!-- sidebar -->
@@ -37,7 +39,7 @@ if(isset($_POST['success'])){
     </div>
 
 </div>
-<canvas class="d-none"></canvas>
+<canvas class="canvas d-none"></canvas>
 <!-- /# row -->
 <section id="main-content">
         <div class="col-lg-6 mx-auto">

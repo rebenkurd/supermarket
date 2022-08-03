@@ -42,6 +42,11 @@ public static function find_by_id($id){
     return !empty($the_result_array) ? array_shift($the_result_array) : false;
 }
 
+public static function searching($name){
+    global $db;
+   return  static::find_by_query("SELECT * FROM ".static::$db_table." WHERE name LIKE '%".$name."%'");
+}
+
 
 public static function find_by_query($sql){
     global $db;
@@ -132,7 +137,7 @@ public function delete(){
     return (mysqli_affected_rows($db->connection)==1) ? true : false;
 }
 
-public function count_all(){
+public static function count_all(){
     global $db;
     $sql="SELECT COUNT(*) FROM ".static::$db_table;
     $result=$db->query($sql);
