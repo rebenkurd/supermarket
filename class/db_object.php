@@ -114,6 +114,11 @@ public function create(){
     }
 }
 
+    public static function find_by_code($pr_code){
+        global $db;
+        $the_result_array=static::find_by_query("SELECT * FROM ".static::$db_table." WHERE code='$pr_code' LIMIT 1");
+        return !empty($the_result_array) ? array_shift($the_result_array) : false;
+    }
 public function update(){
     global $db;
     $properties=$this->properties();

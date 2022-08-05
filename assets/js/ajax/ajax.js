@@ -529,14 +529,14 @@ function clearAllSale() {
 var arg= {
     resultFunction: function(result) {
             $.ajax({
-                url: 'sale.php',
+                url: 'datas.php',
                 type: 'GET',
                 data: {
                     product_code:result.code,
                 },success: function(data){
                     location.reload();
+                    $('.tr_sale').;
                     // console.log(data);
-                    
                 }
             });
     }
@@ -726,22 +726,28 @@ function addItem(id){
 }
 
 
-function Qty(){
-    var qty=$('#pr_quantity').val();
-    var product_code=$('#pr_code').val();
-        $.ajax({
-            url: 'sale.php',
-            type: 'GET',
-            data: {
-                inc:true,
-                pr_quantity:qty,
-                product_code:product_code,
-            },success: function(data){
-                location.reload();
-
-            }
-        })    
-
+function Qty() {
+    var qty=[];
+    var pr_id=[];
+    $('#pr_quantity[name="pr_quantity[]"]').each(function(){
+        qty.push($(this).val());
+    });
+    $('#pr_id[name="pr_id[]"]').each(function(){
+        pr_id.push($(this).val());
+    });
+    for (let i = 0; i < pr_id.length; i++) {
+    $.ajax({
+        url: 'sale.php',
+        type: 'GET',
+        data: {
+        inc: true,
+        pr_quantity: qty[i],
+        pr_id: pr_id[i],
+        },
+        success: function (data) {
+        location.reload()
+        },
+    })}
 }
 
 

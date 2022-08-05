@@ -21,11 +21,6 @@ class Product extends Db_Object{
     public $created_at;
     public $updated_at;
 
-    public static function find_by_code($pr_code){
-        global $db;
-        $the_result_array=static::find_by_query("SELECT * FROM ".static::$db_table." WHERE code='$pr_code' LIMIT 1");
-        return !empty($the_result_array) ? array_shift($the_result_array) : false;
-    }
 
 
     public static function count_expire_product(){

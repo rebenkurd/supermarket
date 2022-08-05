@@ -33,7 +33,7 @@ if(isset($_POST['success'])){
     <div class="col-lg-8 p-r-0 title-margin-right">
         <div class="page-header">
             <div class="page-title">
-                <h1>زیادکردنی بەرهەم</h1>
+                <h1>زیادکردنی کاڵا</h1>
             </div>
         </div>
     </div>
@@ -49,36 +49,36 @@ if(isset($_POST['success'])){
                     <div class="col-lg-6">
                     <div class="form-group">
                         <label for="">کۆد</label>
-                        <input type="text"  id="code" class="form-control" placeholder="کۆد">
+                        <input type="text"  id="code" class="form-control" placeholder="کۆدی کاڵا">
                     </div>
                     </div>
                     <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="">ناو</label>
-                        <input type="text"  id="name" class="form-control" placeholder="ناو">
+                        <label for="">ناوی کاڵا</label>
+                        <input type="text"  id="name" class="form-control" placeholder="ناوی کاڵا">
                     </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="">نرخ</label>
-                        <input type="text" class="form-control" id="price" placeholder="نرخ">
+                        <label for="">نرخی کاڵا</label>
+                        <input type="text" class="form-control" id="price" placeholder="نرخی کاڵا">
                     </div>
                     </div>
                     <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="">دانە</label>
-                        <input type="text" class="form-control" id="quantity" placeholder="دانە">
+                        <label for="">عەدەدی کاڵا</label>
+                        <input type="text" class="form-control" id="quantity" placeholder="عەدەدی کاڵا">
                     </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="">جۆر</label>
+                        <label for="">جۆری کاڵا</label>
                         <select class="form-control" id="category">
-                            <option value="">جۆر</option>
+                            <option value="">جۆری کاڵا</option>
                             <?php
                                 $categories=Category::find_all();
                                 foreach($categories as $category){
@@ -108,13 +108,13 @@ if(isset($_POST['success'])){
                 <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="">بەرواری دەرچوون</label>
+                        <label for="">بەرواری دەرچوونی کاڵا</label>
                         <input type="date"  id="manufacture_date" class="form-control">
                     </div>
                     </div>
                     <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="">بەرواری بەسەرچوون</label>
+                        <label for="">بەرواری بەسەرچوونی کاڵا</label>
                         <input type="date"  id="expire_date" class="form-control">
                     </div>
                     </div>

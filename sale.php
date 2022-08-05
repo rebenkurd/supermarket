@@ -21,67 +21,67 @@ if(isset($_GET['delete'])){
     Sale::clearAllSale();
 }
 
-// if(isset($_GET['pr_id'])){
-// $sale=new Sale();
-// $product=Product::find_by_id($_GET['pr_id']);
-// $saleUp=Sale::find_by_product_id($product->id);
-// if($product){
-//     if($saleUp){
-//     if($saleUp->product_id==$product->id){
-//         if(isset($_GET['inc'])){
-//             $saleUp->pr_quantity=$_GET['pr_quantity'];
-//             $saleUp->total_price=$saleUp->pr_quantity*$saleUp->pr_price;
-//             if(!$saleUp->save()){
-//                 die("error".mysqli_error($db->connection));
-//             }        
-//         }else{
-//             $saleUp->pr_quantity++;
-//             $saleUp->total_price=$saleUp->pr_quantity*$saleUp->pr_price;
-//             if(!$saleUp->save()){
-//                 die("error".mysqli_error($db->connection));
-//             }        
-//         }
-//     }
-//     }else{
-//     $sale->product_id=$product->id;
-//     $sale->pr_code=$product->code;
-//     $sale->pr_name=$product->name;
-//     $sale->pr_price=$product->price;
-//     if(isset($_GET['qty'])){
-//         $sale->pr_quantity= (int)$_GET['qty'];
-//         $sale->total_price=$sale->pr_quantity*$sale->pr_price;
-//     }else{
-//         $sale->pr_quantity= 1 ;
-//         $sale->total_price=$sale->pr_quantity*$sale->pr_price;
-//     }
-//     $sale->saledby=$_SESSION['user_id'];
-//     $sale->created_at=date('Y-m-d H:i:s');
-//     if(!$sale->save()){
-//         die("error".mysqli_error($db->connection));
-//     }
+if(isset($_GET['pr_id'])){
+$sale=new Sale();
+$product=Product::find_by_id($_GET['pr_id']);
+$saleUp=Sale::find_by_product_id($product->id);
+if($product){
+    if($saleUp){
+    if($saleUp->product_id==$product->id){
+        if(isset($_GET['inc'])){
+            $saleUp->pr_quantity=(int)$_GET['pr_quantity'];
+            $saleUp->total_price=$saleUp->pr_quantity*$saleUp->pr_price;
+            if(!$saleUp->save()){
+                die("error".mysqli_error($db->connection));
+            }        
+        }else{
+            $saleUp->pr_quantity++;
+            $saleUp->total_price=$saleUp->pr_quantity*$saleUp->pr_price;
+            if(!$saleUp->save()){
+                die("error".mysqli_error($db->connection));
+            }        
+        }
+    }
+    }else{
+    $sale->product_id=$product->id;
+    $sale->pr_code=$product->code;
+    $sale->pr_name=$product->name;
+    $sale->pr_price=$product->price;
+    if(isset($_GET['qty'])){
+        $sale->pr_quantity= (int)$_GET['qty'];
+        $sale->total_price=$sale->pr_quantity*$sale->pr_price;
+    }else{
+        $sale->pr_quantity= 1 ;
+        $sale->total_price=$sale->pr_quantity*$sale->pr_price;
+    }
+    $sale->saledby=$_SESSION['user_id'];
+    $sale->created_at=date('Y-m-d H:i:s');
+    if(!$sale->save()){
+        die("error".mysqli_error($db->connection));
+    }
 
-// }
-//     }else{
+}
+    }else{
         
-//         $sale->product_id=$product->id;
-//         $sale->pr_code=$product->code;
-//         $sale->pr_name=$product->name;
-//         $sale->pr_price=$product->price;
-//         if(isset($_GET['qty'])){
-//             $sale->pr_quantity=(int)$_GET['qty'];
-//             $sale->total_price=$sale->pr_quantity*$sale->pr_price;
-//         }else{
-//             $sale->pr_quantity=1 ;
-//             $sale->total_price=$sale->pr_quantity*$sale->pr_price;
-//         }
-//         $sale->saledby=$_SESSION['user_id'];
-//         $sale->created_at=date('Y-m-d H:i:s');
-//         if(!$sale->save()){
-//             die("error".mysqli_error($db->connection));
-//         }
+        $sale->product_id=$product->id;
+        $sale->pr_code=$product->code;
+        $sale->pr_name=$product->name;
+        $sale->pr_price=$product->price;
+        if(isset($_GET['qty'])){
+            $sale->pr_quantity=(int)$_GET['qty'];
+            $sale->total_price=$sale->pr_quantity*$sale->pr_price;
+        }else{
+            $sale->pr_quantity=1 ;
+            $sale->total_price=$sale->pr_quantity*$sale->pr_price;
+        }
+        $sale->saledby=$_SESSION['user_id'];
+        $sale->created_at=date('Y-m-d H:i:s');
+        if(!$sale->save()){
+            die("error".mysqli_error($db->connection));
+        }
     
-//     }
-// }
+    }
+}
 
 if(isset($_GET['product_code'])){
 $sale=new Sale();
@@ -122,6 +122,7 @@ $product=Product::find_by_code($_GET['product_code']);
 }
     
 }
+
 if(isset($_POST['success'])){
     $order=new Orders();
     $order->pr_id=$_POST['pr_id'];
@@ -265,7 +266,7 @@ if(isset($_POST['success'])){
                             <tr id="tr_sale_<?php echo $sale->id; ?>" class="tr_sale">
                                     <td><?php echo $a++; ?></td>
                                 <td>
-                                    <input type="hidden" id="pr_id" name="pr_id[]" value="<?php echo $sale->product_id; ?>">    
+                                    <input type="hidden" id="pr_id"  name="pr_id[]" value="<?php echo $sale->product_id; ?>">    
                                     <input type="hidden" id="pr_code" name="pr_code[]" value="<?php echo $sale->pr_code; ?>">    
                                     <?php echo $sale->pr_code; ?>
                                 </td>
@@ -275,7 +276,9 @@ if(isset($_POST['success'])){
                                 </td>
                                 <td>
                                     <input type="hidden" id="value" value="<?php echo $sale->pr_quantity; ?>">    
-                                    <input type="text" id="pr_quantity" onchange="Qty()" name="pr_quantity[]" class="form-control" style="width:100px ; text-align:center" value="<?php echo $sale->pr_quantity; ?>">    
+                                    <input type="text" id="pr_quantity" 
+                                    onchange="Qty(<?php echo $sale->product_id; ?>)"
+                                    name="pr_quantity[]" class="form-control" style="width:100px ; text-align:center" value="<?php echo $sale->pr_quantity; ?>"/>    
                                 </td>
                                 <td>
                                     <input type="hidden" id="pr_price" name="pr_price[]" value="<?php echo $sale->pr_price; ?>">    
