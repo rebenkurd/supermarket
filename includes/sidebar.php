@@ -49,6 +49,20 @@
 			<li><a href="company_recycle.php">کۆمپانیایە سڕاوەکان</a></li>
 		</ul>
 	</li>
+	<li><a class="sidebar-sub-toggle"><i class="ti-shopping-cart-full" aria-hidden="true"></i> لیستی فرۆشراوەکان <span
+				class="sidebar-collapse-icon ti-angle-down"></span></a>
+		<ul>
+			<li><a href="order_list.php">بینینی فرۆشراوەکان</a></li>
+			<li><a href="order_recycle.php">فرۆشراوە سڕاوەکان</a></li>
+		</ul>
+	</li>
+	<li><a class="sidebar-sub-toggle"><i class="ti-files" aria-hidden="true"></i> وەصڵەکان <span
+				class="sidebar-collapse-icon ti-angle-down"></span></a>
+		<ul>
+			<li><a href="small_invoice.php">وەصڵی بچووک</a></li>
+			<li><a href="larg_invoice.php">وەصڵی گەورە</a></li>
+		</ul>
+	</li>
 	</ul>
 	</div>
 	</div>

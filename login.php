@@ -59,7 +59,7 @@ if(isset($_POST['submit'])){
     <div class="unix-login ">
         <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-xl-3 col-md-6 col-sm-6">
                     <div class="login-content radius-10 shadow">
                         <div class="login-form">
                             <h4>فۆڕمی چوونەژوورەوە</h4>

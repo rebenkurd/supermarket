@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 03, 2022 at 01:19 PM
+-- Generation Time: Aug 05, 2022 at 07:40 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -104,16 +104,6 @@ CREATE TABLE `orders` (
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `pr_id`, `pr_code`, `pr_name`, `pr_quantity`, `pr_price`, `total_price`, `recycle`, `saledby`, `created_at`, `updated_at`) VALUES
-(52, 17, '', '', 0, 0, 0, 0, '1', '2022-08-02 00:15:50', '0000-00-00 00:00:00'),
-(53, 17, '', '', 0, 0, 0, 0, '1', '2022-08-02 00:16:03', '0000-00-00 00:00:00'),
-(54, 0, '', '', 0, 0, 0, 0, '1', '2022-08-02 00:16:59', '0000-00-00 00:00:00'),
-(55, 0, '', '', 0, 0, 0, 0, '1', '2022-08-02 00:17:08', '0000-00-00 00:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -142,8 +132,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `code`, `name`, `category`, `price`, `quantity`, `company`, `description`, `manufacture_date`, `expire_date`, `recycle`, `addedby`, `created_at`, `updated_at`) VALUES
-(17, 'http://formula.id', 'هەویری ددان', 9, '2000', 40, 1, '', '2022-01-01', '2022-08-01', 0, '1', '2022-07-27 16:15:34', '2022-07-27 17:29:05'),
-(25, '8991102100434', 'فڵچەی ددان', 9, '2500', 45, 1, '', '2022-07-28', '2022-09-29', 0, '1', '2022-07-28 17:47:18', '0000-00-00 00:00:00');
+(27, '8697449910964', 'ئاوە تەماتەی ئاڵتونسا', 11, '2500', 6, 1, '', '2022-05-09', '2024-05-08', 0, '1', '2022-08-05 14:36:33', '0000-00-00 00:00:00'),
+(28, '8991102024099', 'فڵچەی ددان', 9, '1000', 78, 1, '', '2022-08-05', '2023-06-05', 0, '1', '2022-08-05 14:43:04', '0000-00-00 00:00:00'),
+(29, '6930258184259', 'کەتیرەی dr. fon', 8, '1000', 76, 7, '', '2022-08-05', '2022-08-31', 0, '1', '2022-08-05 15:11:40', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -175,7 +166,7 @@ INSERT INTO `role` (`id`, `name`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `sale` (
   `id` int(11) NOT NULL,
-  `pr_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
   `pr_code` varchar(255) NOT NULL,
   `pr_name` varchar(255) NOT NULL,
   `pr_quantity` int(11) NOT NULL,
@@ -187,6 +178,14 @@ CREATE TABLE `sale` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `sale`
+--
+
+INSERT INTO `sale` (`id`, `product_id`, `pr_code`, `pr_name`, `pr_quantity`, `pr_price`, `total_price`, `saledby`, `recycle`, `status`, `created_at`, `updated_at`) VALUES
+(254, 29, '6930258184259', 'کەتیرەی dr. fon', 1, 1000, 1000, '1', 0, 0, '2022-08-05 15:24:35', '0000-00-00 00:00:00'),
+(255, 28, '8991102024099', 'فڵچەی ددان', 6, 1000, 6000, '1', 0, 0, '2022-08-05 15:26:47', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -246,9 +245,9 @@ ALTER TABLE `orders`
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `category` (`category`),
-  ADD KEY `company` (`company`) USING BTREE;
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `company` (`company`),
+  ADD KEY `category` (`category`);
 
 --
 -- Indexes for table `role`
@@ -289,13 +288,13 @@ ALTER TABLE `company`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -307,7 +306,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `sale`
 --
 ALTER TABLE `sale`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=256;
 
 --
 -- AUTO_INCREMENT for table `users`

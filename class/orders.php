@@ -18,5 +18,9 @@ class Orders extends Db_Object{
     public $updated_at;
 
 
+
+
+
+    
 }
 ?>

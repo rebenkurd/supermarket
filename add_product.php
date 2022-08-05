@@ -39,7 +39,7 @@ if(isset($_POST['success'])){
     </div>
 
 </div>
-<canvas class="canvas d-none"></canvas>
+<canvas class="d-none"></canvas>
 <!-- /# row -->
 <section id="main-content">
         <div class="col-lg-6 mx-auto">

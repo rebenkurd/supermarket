@@ -9,7 +9,7 @@
   font-style: normal;
   }
   body{
-    font-family: "DroidKufi-Regular" ,'Roboto'!important;
+    font-family: "DroidKufi-Regular" ,'Roboto',sans-serif!important;
   }
 a,
 h1,h2,h3,h4,h5,h6,
@@ -18,6 +18,9 @@ p,input,textarea{
 }
 .form-control{
   text-align: right;
+}
+.fn-kufi{
+  font-family: 'DroidKufi-Regular','Roboto',sans-serif !important;
 }
 /*
     Template: Admin Board
@@ -138,7 +141,49 @@ p,input,textarea{
 .search-item .search-item-price {
   width: 100px;
 }
+@media print {
+  #small_invoice {
 
+      height: auto;
+      width: 10cm;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 15px;
+      font-size: 12px;
+      line-height: 18px;
+      font-family:"DroidKufi-Regular" ,"Roboto","Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+  }
+  #row{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+  }
+  #printer_btn{
+    display: none !important;
+  }
+}
+#small_invoice {
+  height: auto;
+  width: 10cm;
+  padding: 15px;
+  font-size: 12px;
+  line-height: 18px;
+  font-family:"DroidKufi-Regular" ,"Roboto","Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+table tbody tr td{
+  font-family: "DroidKufi-Regular" ,'Roboto',sans-serif!important;
+}
+#small_invoice .invoice-logo{
+  width: 80px;
+  height:80px;
+  overflow: hidden;
+}
+#small_invoice .invoice-logo img{
+  width: 100%;
+  height:100%;
+  overflow: hidden;
+  object-fit: cover;
+}
 
 .card-body {
   padding: 0;
