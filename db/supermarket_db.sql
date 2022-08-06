@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 05, 2022 at 07:40 PM
+-- Generation Time: Aug 06, 2022 at 12:44 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -87,11 +87,34 @@ INSERT INTO `company` (`id`, `name`, `description`, `recycle`, `addedby`, `creat
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `customer_order`
+--
+
+CREATE TABLE `customer_order` (
+  `id` int(11) NOT NULL,
+  `code` int(255) NOT NULL,
+  `recycle` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `customer_order`
+--
+
+INSERT INTO `customer_order` (`id`, `code`, `recycle`, `created_at`, `updated_at`) VALUES
+(7, 2383, 0, '2022-08-06 00:48:17', '0000-00-00 00:00:00'),
+(9, 7561, 0, '2022-08-06 01:34:44', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
+  `order_code` int(11) NOT NULL,
   `pr_id` int(11) NOT NULL,
   `pr_code` varchar(255) NOT NULL,
   `pr_name` varchar(255) NOT NULL,
@@ -103,6 +126,15 @@ CREATE TABLE `orders` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `order_code`, `pr_id`, `pr_code`, `pr_name`, `pr_quantity`, `pr_price`, `total_price`, `recycle`, `saledby`, `created_at`, `updated_at`) VALUES
+(161, 238, 27, '8697449910964', 'ئاوە تەماتەی ئاڵتونسا', 7, 2500, 17500, 0, '1', '2022-08-06 00:48:17', '0000-00-00 00:00:00'),
+(162, 2383, 28, '8991102024099', 'فڵچەی ددان', 58, 1000, 58000, 0, '1', '2022-08-06 00:48:17', '0000-00-00 00:00:00'),
+(163, 7561, 28, '8991102024099', 'فڵچەی ددان', 34, 1000, 34000, 0, '1', '2022-08-06 01:34:44', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -121,6 +153,7 @@ CREATE TABLE `products` (
   `description` text NOT NULL,
   `manufacture_date` date NOT NULL,
   `expire_date` date NOT NULL,
+  `debt` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 = no\r\n1= yes',
   `recycle` int(11) NOT NULL DEFAULT 0,
   `addedby` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL,
@@ -131,10 +164,10 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `code`, `name`, `category`, `price`, `quantity`, `company`, `description`, `manufacture_date`, `expire_date`, `recycle`, `addedby`, `created_at`, `updated_at`) VALUES
-(27, '8697449910964', 'ئاوە تەماتەی ئاڵتونسا', 11, '2500', 6, 1, '', '2022-05-09', '2024-05-08', 0, '1', '2022-08-05 14:36:33', '0000-00-00 00:00:00'),
-(28, '8991102024099', 'فڵچەی ددان', 9, '1000', 78, 1, '', '2022-08-05', '2023-06-05', 0, '1', '2022-08-05 14:43:04', '0000-00-00 00:00:00'),
-(29, '6930258184259', 'کەتیرەی dr. fon', 8, '1000', 76, 7, '', '2022-08-05', '2022-08-31', 0, '1', '2022-08-05 15:11:40', '0000-00-00 00:00:00');
+INSERT INTO `products` (`id`, `code`, `name`, `category`, `price`, `quantity`, `company`, `description`, `manufacture_date`, `expire_date`, `debt`, `recycle`, `addedby`, `created_at`, `updated_at`) VALUES
+(27, '8697449910964', 'ئاوە تەماتەی ئاڵتونسا', 11, '2500', -29, 1, '', '2022-05-09', '2024-05-08', 1, 0, '1', '2022-08-05 14:36:33', '2022-08-05 23:48:31'),
+(28, '8991102024099', 'فڵچەی ددان', 9, '1000', -294, 1, '', '2022-08-05', '2023-06-05', 0, 0, '1', '2022-08-05 14:43:04', '0000-00-00 00:00:00'),
+(29, '6930258184259', 'کەتیرەی dr. fon', 8, '1000', 76, 7, '', '2022-08-05', '2022-08-31', 0, 0, '1', '2022-08-05 15:11:40', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -178,14 +211,6 @@ CREATE TABLE `sale` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `sale`
---
-
-INSERT INTO `sale` (`id`, `product_id`, `pr_code`, `pr_name`, `pr_quantity`, `pr_price`, `total_price`, `saledby`, `recycle`, `status`, `created_at`, `updated_at`) VALUES
-(254, 29, '6930258184259', 'کەتیرەی dr. fon', 1, 1000, 1000, '1', 0, 0, '2022-08-05 15:24:35', '0000-00-00 00:00:00'),
-(255, 28, '8991102024099', 'فڵچەی ددان', 6, 1000, 6000, '1', 0, 0, '2022-08-05 15:26:47', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -236,10 +261,18 @@ ALTER TABLE `company`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `customer_order`
+--
+ALTER TABLE `customer_order`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `order_code` (`code`) USING BTREE;
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_code` (`order_code`);
 
 --
 -- Indexes for table `products`
@@ -285,16 +318,22 @@ ALTER TABLE `company`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `customer_order`
+--
+ALTER TABLE `customer_order`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -306,7 +345,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `sale`
 --
 ALTER TABLE `sale`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=256;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=266;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -317,6 +356,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `customer_order`
+--
+ALTER TABLE `customer_order`
+  ADD CONSTRAINT `order_code` FOREIGN KEY (`code`) REFERENCES `orders` (`order_code`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `products`
