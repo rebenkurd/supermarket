@@ -14,5 +14,6 @@
     <link href="assets/css/lib/themify-icons.css" rel="stylesheet">
     <link href="assets/css/lib/menubar/sidebar.css" rel="stylesheet">
     <link href="assets/css/lib/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="css/lib/helper.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet"></head>
 <body>

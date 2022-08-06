@@ -7,6 +7,8 @@
     <script src="assets/js/lib/data-table/datatables-init.js"></script>
     <script src="assets/js/lib/scanner/qrcodelib.js"></script>
     <script src="assets/js/lib/scanner/webcodecamjquery.js"></script>
+    <script src="js/lib/sparklinechart/jquery.sparkline.min.js"></script>
+    <script src="js/lib/sparklinechart/sparkline.init.js"></script>
     <script src="assets/js/ajax/ajax.js"></script>
     <script src="assets/js/main.js"></script>
 </body>

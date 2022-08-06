@@ -14,6 +14,7 @@ if(isset($_POST['success'])){
         $product->description = $_POST['description'];
         $product->manufacture_date = $_POST['manufacture_date'];
         $product->expire_date = $_POST['expire_date'];
+        $product->debt = $_POST['debt'];
         $product->addedby = $_SESSION['user_id'];
         $product->created_at=date("Y-m-d H:i:s");   
         if(!$product->save()){
@@ -119,7 +120,15 @@ if(isset($_POST['success'])){
                     </div>
                     </div>
                 </div>
-                <div class="form-group">
+                    <div class="form-group">
+                        <label for="">کاڵایەکە قەرزە؟</label>
+                        <select id="debt" class="form-control">
+                            <option value="">کاڵایەکە قەرزە؟</option>
+                            <option value="0">نەخێر</option>
+                            <option value="1">بەڵێ</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="">زانیاری زیاتر</label>
                         <textarea  id="description" class="form-control" cols="30" rows="10"></textarea>
                     </div>

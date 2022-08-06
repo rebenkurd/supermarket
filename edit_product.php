@@ -11,6 +11,7 @@ if(isset($_GET['pid'])){
         $product=Product::find_by_id($_GET['pid']);
         $product->name = $_GET['name'];
         $product->code = $_GET['code'];
+        $product->debt = $_GET['debt'];
         $product->category = $_GET['category'];
         $product->company = $_GET['company'];
         $product->quantity = $_GET['quantity'];
@@ -121,11 +122,26 @@ if(isset($_GET['pid'])){
                     </div>
                 </div>
                 <div class="form-group">
+                        <label for="">کاڵایەکە قەرزە؟</label>
+                        <select id="debt" class="form-control">
+                            <option value="">کاڵایەکە قەرزە؟</option>
+                            <?php
+                                if($product->debt==0){
+                            ?>
+                            <option value="0" selected>نەخێر</option>
+                            <option value="1" >بەڵێ</option>
+                            <?php }else{ ?>
+                            <option value="0" >نەخێر</option>
+                            <option value="1" selected>بەڵێ</option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                <div class="form-group">
                         <label for="">زانیاری زیاتر</label>
                         <textarea  id="description" class="form-control" cols="30" rows="10"><?php echo $product->description; ?></textarea>
                     </div>
                     <div class="form-group text-center">
-                    <button type="button" onclick="editProduct(<?php echo $product->id; ?>)" class="btn btn-success w-25">زیادکردن</button>
+                    <button type="button" onclick="editProduct(<?php echo $product->id; ?>)" class="btn btn-success w-25">پاسەکەوتکردن</button>
                     </div>
             </div>
             <!-- /# card -->

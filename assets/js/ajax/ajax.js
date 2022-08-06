@@ -131,6 +131,7 @@ function addProduct(){
         var Price=$('#price').val();
         var Quantity=$('#quantity').val();
         var Description=$('#description').val();
+        var Debt=$('#debt').val();
         var ExpireDate = new Date($('#expire_date').val());
         var ManufactureDate = new Date($('#manufacture_date').val());
         var exd = ExpireDate.getDate('dd');
@@ -155,6 +156,8 @@ function addProduct(){
             $('#msg').html('<div class="alert alert-danger">تکایە بەرواری دەرچوون داخڵ بکە</div>');
         }else if(ExpireDate=='Invalid Date'){
             $('#msg').html('<div class="alert alert-danger">تکایە بەرواری بەسەرجوون داخڵ بکە</div>');
+        }else if(Debt==''){
+            $('#msg').html('<div class="alert alert-danger">کاڵایەکەت قەرزە یان نا؟</div>');
         } else{
         $.ajax({
             url: 'add_product.php',
@@ -168,6 +171,7 @@ function addProduct(){
                 quantity: Quantity,
                 code: Code,
                 description: Description,
+                debt: Debt,
                 expire_date: [exy,exm,exd].join('-'),
                 manufacture_date: [mfy,mfm,mfd].join('-'),
             },success: function(data){
@@ -180,6 +184,7 @@ function addProduct(){
                 $('#description').val('');
                 $('#expire_date').val('');
                 $('#manufacture_date').val('');
+                $('#debt').val('');
                 $('#msg').html('<div class="alert alert-success">زانیارییەکان زیادکرا</div>');
                 console.log(data);
             }
@@ -239,6 +244,7 @@ function addProduct(){
         var Category=$('#category').val();
         var Company=$('#company').val();
         var Code=$('#code').val();
+        var Debt=$('#debt').val();
         var Price=$('#price').val();
         var Quantity=$('#quantity').val();
         var Description=$('#description').val();
@@ -266,6 +272,8 @@ function addProduct(){
             $('#msg').html('<div class="alert alert-danger">تکایە بەرواری دەرچوون داخڵ بکە</div>');
         }else if(ExpireDate=='Invalid Date'){
             $('#msg').html('<div class="alert alert-danger">تکایە بەرواری بەسەرجوون داخڵ بکە</div>');
+        }else if(Debt==''){
+            $('#msg').html('<div class="alert alert-danger">کاڵایەکەت قەرزە یان نا؟</div>');
         } else{
         $.ajax({
             url: 'edit_product.php',
@@ -278,6 +286,7 @@ function addProduct(){
                 company: Company,
                 quantity: Quantity,
                 code: Code,
+                debt: Debt,
                 description: Description,
                 expire_date: [exy,exm,exd].join('-'),
                 manufacture_date: [mfy,mfm,mfd].join('-'),
@@ -497,7 +506,11 @@ function addSaleProduct(){
             pr_id:pr_id,
             qty: Qty,
         },success: function(data){
+            $('#products').val('');
+            $('#quantity').val('');
             location.reload();
+
+            // $('#trr').load('sale_data.php');
             // console.log(data);
             
         }
@@ -529,13 +542,13 @@ function clearAllSale() {
 var arg= {
     resultFunction: function(result) {
             $.ajax({
-                url: 'datas.php',
+                url: 'sale.php',
                 type: 'GET',
                 data: {
                     product_code:result.code,
                 },success: function(data){
-                    location.reload();
-                    $('.tr_sale').;
+                    // location.reload();
+                    $('#trr').load('sale_data.php');
                     // console.log(data);
                 }
             });
@@ -668,7 +681,7 @@ function multiDeleteUser(){
 }
 }
 
-function saveAllProduct(){
+function saveAllProduct(oc){
     var pr_id=[];
     var pr_code=[];
     var pr_name=[];
@@ -699,6 +712,7 @@ function saveAllProduct(){
         type: 'POST',
         data: {
             success:true,
+            oc:oc,
             pr_id:pr_id[i],
             pr_code:pr_code[i],
             pr_name:pr_name[i],
@@ -706,7 +720,7 @@ function saveAllProduct(){
             pr_price:pr_price[i],
             total_price:total_price[i],
         },success: function(data){
-            location.reload();
+            // location.reload();
         }
     })
 }
@@ -719,7 +733,7 @@ function addItem(id){
         data: {
             pr_id:id,
         },success: function(data){
-            location.reload();
+            $('#trr').load('sale_data.php');
             // console.log(data);
         }
     })
@@ -815,6 +829,18 @@ function orderRecovery(order_id) {
 });
 }
 
+function orderRestore(oid) {
+    $.ajax({
+        url: 'order_list.php',
+        type: 'GET',
+        data: {
+            oid:oid
+        },success: function(){
+            $('#tr_order_'+oid).hide();
+        }
+
+});
+}
 
 function multiRecycleOrder(){
     var selected=$('#sel[name="sel[]"]').filter(':checked');
@@ -875,4 +901,40 @@ function multiDeleteOrder(){
         }
     })
 }
+}
+
+
+
+// amount
+
+function Amount(){
+    var sum=0;
+    var price=[];
+    $('#total_price[name="total_price[]"').each(function(){
+        price.push($(this).val());
+    }
+    );
+    for (let i = 0; i < price.length; i++) {
+        sum+=parseInt(price[i]);
+    }
+    $('#amount').html(sum + ' دینار ');
+}
+Amount();
+
+
+
+
+
+
+// order list
+function seeCustomer(cc){
+    $.ajax({
+        url: 'order_list.php',
+        type: 'GET',
+        data: {
+            cc:cc
+        },success: function(data){
+            window.location.href='order_list.php?cc='+cc;
+        }
+    })
 }

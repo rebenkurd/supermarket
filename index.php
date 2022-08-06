@@ -27,182 +27,89 @@
 
                     <div class="row">
                         <div class="col-lg-3">
+                        <a href="products.php">
                             <div class="card">
-                                <div class="stat-widget-one">
-                                    <div class="stat-icon dib"><i class="ti-package color-success border-success"></i>
-                                    </div>
-                                    <div class="stat-content dib">
-                                        <div class="stat-text">بەرهەمەکان</div>
-                                        <div class="stat-digit"><?php echo number_format(Product::count_all()); ?></div>
+                                <div class="stat-widget-four">
+                                <div class="stat-icon">
+                                    <i class="ti-package"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                    <div class="stat-heading">کاڵاکان</div>
+                                    <div class="stat-text">کۆی گشتی : <?php  echo number_format(Product::count_all()); ?></div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="card">
-                                <div class="stat-widget-one">
-                                    <div class="stat-icon dib"><i class="ti-user color-primary border-primary"></i>
-                                    </div>
-                                    <div class="stat-content dib">
-                                        <div class="stat-text">بەکارهێنەرەکان</div>
-                                        <div class="stat-digit"><?php echo number_format(User::count_all()); ?></div>
-                                    </div>
                                 </div>
                             </div>
+                        </a>
                         </div>
                         <div class="col-lg-3">
+                        <a href="users.php">
                             <div class="card">
-                                <div class="stat-widget-one">
-                                    <div class="stat-icon dib"><i class="fa fa-building color-pink border-pink"></i>
-                                    </div>
-                                    <div class="stat-content dib">
-                                        <div class="stat-text">کۆمپانیاکان</div>
-                                        <div class="stat-digit"><?php echo number_format(Company::count_all()); ?></div>
+                                <div class="stat-widget-four">
+                                <div class="stat-icon">
+                                    <i class="ti-user"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                    <div class="stat-heading">بەکارهێنەرەکان</div>
+                                    <div class="stat-text">کۆی گشتی : <?php echo number_format(User::count_all()); ?></div>
                                     </div>
                                 </div>
+                                </div>
                             </div>
+                        </a>
                         </div>
                         <div class="col-lg-3">
-                            <div class="card">
-                                <div class="stat-widget-one">
-                                    <div class="stat-icon dib"><i class="fa fa-cubes color-danger border-danger"></i></div>
-                                    <div class="stat-content dib">
-                                        <div class="stat-text">جۆرەکان</div>
-                                        <div class="stat-digit"><?php echo number_format(Category::count_all()); ?></div>
+                        <a href="companys.php">
+                        <div class="card">
+                                <div class="stat-widget-four">
+                                <div class="stat-icon">
+                                    <i class="fa fa-building"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                    <div class="stat-heading">کۆمپانیاکان</div>
+                                    <div class="stat-text">کۆی گشتی : <?php echo number_format(Company::count_all()); ?></div>
                                     </div>
+                                </div>
+                                </div>
+                            </div>
+                        </a>
+                        </div>
+                        <div class="col-lg-3">
+                            <a href="categories.php">
+                        <div class="card">
+                                <div class="stat-widget-four">
+                                <div class="stat-icon">
+                                    <i class="ti-layout-grid2"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                    <div class="stat-heading">جۆری کاڵاکان</div>
+                                    <div class="stat-text">کۆی گشتی : <?php echo number_format(Category::count_all()); ?></div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </a>
+                        </div>
+                        <div class="col-lg-3">
+                        <div class="card">
+                                <div class="stat-widget-four">
+                                <div class="stat-icon">
+                                    <i class="ti-money"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                    <div class="stat-heading">داهاتی فرۆشتن</div>
+                                    <div class="stat-text">کۆی گشتی : <?php echo Orders::TotalPrice()>0?Orders::TotalPrice():'0.00'; ?> دینار</div>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-					<div class="row">
-                        <!-- /# column -->
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-title pr">
-                                    <h4>All Exam Result</h4>
-
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table student-data-table m-t-20">
-                                            <thead>
-                                                <tr>
-                                                    <th><label><input type="checkbox" value=""></label>Exam Name</th>
-                                                    <th>Subject</th>
-                                                    <th>Grade Point</th>
-                                                    <th>Percent Form</th>
-                                                    <th>Percent Upto</th>
-                                                    <th>Date</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Class Test</td>
-                                                    <td>Mathmatics</td>
-                                                    <td>
-                                                        4.00
-                                                    </td>
-                                                    <td>
-                                                        95.00
-                                                    </td>
-                                                    <td>
-                                                        100
-                                                    </td>
-                                                    <td>20/04/2017</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Class Test</td>
-                                                    <td>Mathmatics</td>
-                                                    <td>
-                                                        4.00
-                                                    </td>
-                                                    <td>
-                                                        95.00
-                                                    </td>
-                                                    <td>
-                                                        100
-                                                    </td>
-                                                    <td>20/04/2017</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Class Test</td>
-                                                    <td>English</td>
-                                                    <td>
-                                                        4.00
-                                                    </td>
-                                                    <td>
-                                                        95.00
-                                                    </td>
-                                                    <td>
-                                                        100
-                                                    </td>
-                                                    <td>20/04/2017</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Class Test</td>
-                                                    <td>Bangla</td>
-                                                    <td>
-                                                        4.00
-                                                    </td>
-                                                    <td>
-                                                        95.00
-                                                    </td>
-                                                    <td>
-                                                        100
-                                                    </td>
-                                                    <td>20/04/2017</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Class Test</td>
-                                                    <td>Mathmatics</td>
-                                                    <td>
-                                                        4.00
-                                                    </td>
-                                                    <td>
-                                                        95.00
-                                                    </td>
-                                                    <td>
-                                                        100
-                                                    </td>
-                                                    <td>20/04/2017</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Class Test</td>
-                                                    <td>English</td>
-                                                    <td>
-                                                        4.00
-                                                    </td>
-                                                    <td>
-                                                        95.00
-                                                    </td>
-                                                    <td>
-                                                        100
-                                                    </td>
-                                                    <td>20/04/2017</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Class Test</td>
-                                                    <td>Mathmatics</td>
-                                                    <td>
-                                                        4.00
-                                                    </td>
-                                                    <td>
-                                                        95.00
-                                                    </td>
-                                                    <td>
-                                                        100
-                                                    </td>
-                                                    <td>20/04/2017</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /# column -->
-                    </div>
-					
                 </section>
 			</div>
 			<!-- /# row -->

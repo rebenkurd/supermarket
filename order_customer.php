@@ -1,24 +1,5 @@
 <!-- header -->
 <?php include 'includes/header.php'; ?>
-<?php
-if(isset($_GET['id'])){
-        $order=Orders::find_by_id($_GET['id']);
-        $order->recycle=1;
-        $order->save();
-    }
-
-?>
-<?php
-if(isset($_GET['oid'])){
-        $order=Orders::find_by_id($_GET['oid']);
-            $product=Product::find_by_id($order->pr_id);
-            $product->quantity +=$order->pr_quantity;
-            if($product->save()){
-                $order->delete();
-        }
-    }
-
-?>
 <!-- sidebar -->
 <?php include 'includes/sidebar.php'; ?>
 <!-- header -->
@@ -56,56 +37,42 @@ if(isset($_GET['oid'])){
                                                     <input type="checkbox" id="checkall">
                                                     </th>
                                                     <th>زنجیرە</th>
-                                                    <th>کۆدی کاڵا</th>
-                                                    <th>ناو کاڵا</th>
-                                                    <th>عەدەد</th>
-                                                    <th>نرخی کاڵا</th>
-                                                    <th>کۆی نرخ</th>
-                                                    <th>فرۆشیار</th>
+                                                    <th>کۆدی</th>
                                                     <th>کردار</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php 
-                                                $orders = Orders::find_all();
+                                                $customers = CustOrder::find_all();
                                                 $a=1;
-                                                foreach($orders as $order){
-                                                    if($order->recycle==0){
-                                                        if($order->order_code==$_GET['cc']){
+                                                foreach($customers as $customer){
+                                                    if($customer->recycle==0){
                                                 ?>
-                                                <tr id="tr_order_<?php echo $order->id; ?>">
+                                                <tr id="tr_customer_<?php echo $customer->id; ?>">
                                                     <td>
                                                         <input type="checkbox" 
                                                         id="sel" 
                                                         class="checkitem"
                                                         name="sel[]" 
                                                         value="<?php 
-                                                        echo $order->id; ?>">
+                                                        echo $customer->id; ?>">
                                                     </td>
                                                     <td><?php echo $a++; ?></td>
-                                                    <td><?php echo htmlentities($order->pr_code,ENT_QUOTES,'UTF-8'); ?></td>
-                                                    <td><?php echo htmlentities($order->pr_name,ENT_QUOTES,'UTF-8'); ?></td>
-                                                    <td><?php echo htmlentities($order->pr_quantity,ENT_QUOTES,'UTF-8'); ?></td>
-                                                    <td><?php echo htmlentities(number_format($order->pr_price,0),ENT_QUOTES,'UTF-8'); ?></td>
-                                                    <td><?php echo htmlentities(number_format($order->total_price,0),ENT_QUOTES,'UTF-8'); ?></td>
-                                                    <td><?php
-                                                        $addedby=User::find_by_id($order->saledby);
-                                                        echo htmlentities($addedby->first_name.' '.$addedby->last_name,ENT_QUOTES,'UTF-8');
-                                                    ?></td>
+                                                    <td><?php echo htmlentities($customer->code,ENT_QUOTES,'UTF-8'); ?></td>
                                                     <td>
-                                                        <button type="button" onclick="orderUpdate(<?php echo $order->id; ?>)" class="btn btn-warning" title="دەستکاریکردن">
-                                                            <span class="ti-pencil-alt"></span>
+                                                        <button type="button" onclick="seeCustomer(<?php echo $customer->code; ?>)" class="btn btn-warning" title="بینینین">
+                                                            <span class="ti-eye"></span>
                                                         </button>
-                                                        <button type="button" onclick="orderRestore(<?php echo $order->id; ?>)" class="btn btn-success" title="گەڕاندنەوە">
+                                                        <button type="button" onclick="customerRestore(<?php echo $customer->id; ?>)" class="btn btn-success" title="گەڕاندنەوە">
                                                             <span class="ti-back-right"></span>
                                                         </button>
-                                                        <button type="button"  class="btn btn-secondary " onclick="orderRecycle(<?php echo $order->id; ?>)"
+                                                        <button type="button"  class="btn btn-secondary " onclick="customerRecycle(<?php echo $customer->id; ?>)"
                                                         title="ناردنی بۆ بەشی سڕاوەکان">
                                                             <span class="ti-archive"></span>
                                                         </button>
                                                     </td>
                                                 </tr>
-                                                <?php }}} ?>
+                                                <?php }} ?>
                                             </tbody>
                                         </table>
 

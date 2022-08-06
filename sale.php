@@ -125,6 +125,7 @@ $product=Product::find_by_code($_GET['product_code']);
 
 if(isset($_POST['success'])){
     $order=new Orders();
+    $order->order_code=$_POST['oc'];
     $order->pr_id=$_POST['pr_id'];
     $order->pr_code=$_POST['pr_code'];
     $order->pr_name=$_POST['pr_name'];
@@ -133,7 +134,21 @@ if(isset($_POST['success'])){
     $order->total_price=$_POST['total_price'];
     $order->saledby=$_SESSION['user_id'];
     $order->created_at=date('Y-m-d H:i:s');
-        if(!$order->save()){
+        if($order->save()){
+
+            $product=Product::find_by_id($_POST['pr_id']);
+            $product->quantity-=(int)$_POST['pr_quantity'];
+            if(!$product->save()){
+                die("error".mysqli_error($db->connection));
+            }else{
+                $customer=new CustOrder();
+                $customer->code=$_POST['oc'];
+                $customer->created_at=date('Y-m-d H:i:s');
+                if(!$customer->save()){
+                    die("error".mysqli_error($db->connection));
+                }
+            }
+        }else{
             die("error".mysqli_error($db->connection));
         }
     }
@@ -253,53 +268,55 @@ if(isset($_POST['success'])){
                                 <?php
                                 
                                 ?>
-                                <td style="font-size:1.4rem;font-weight:bold" class="text-success"><?php echo Sale::totalPrice(); ?> دینار</td>
+                                <td style="font-size:1.4rem;font-weight:bold" class="text-success" id="amount"></td>
                             </tr>
                         </tfoot>
-                        <tbody>
+                        <tbody id="trr">
                             <?php
                             $sales=Sale::find_all();
                             $a=1;
                             foreach($sales as $sale){
-                            if($sale->status==0){
+                            if($sale){
                             ?>
-                            <tr id="tr_sale_<?php echo $sale->id; ?>" class="tr_sale">
-                                    <td><?php echo $a++; ?></td>
-                                <td>
-                                    <input type="hidden" id="pr_id"  name="pr_id[]" value="<?php echo $sale->product_id; ?>">    
-                                    <input type="hidden" id="pr_code" name="pr_code[]" value="<?php echo $sale->pr_code; ?>">    
-                                    <?php echo $sale->pr_code; ?>
-                                </td>
-                                <td>
-                                    <input type="hidden" id="pr_name" name="pr_name[]" value="<?php echo $sale->pr_name; ?>">    
-                                    <?php echo $sale->pr_name; ?>
-                                </td>
-                                <td>
-                                    <input type="hidden" id="value" value="<?php echo $sale->pr_quantity; ?>">    
-                                    <input type="text" id="pr_quantity" 
-                                    onchange="Qty(<?php echo $sale->product_id; ?>)"
-                                    name="pr_quantity[]" class="form-control" style="width:100px ; text-align:center" value="<?php echo $sale->pr_quantity; ?>"/>    
-                                </td>
-                                <td>
-                                    <input type="hidden" id="pr_price" name="pr_price[]" value="<?php echo $sale->pr_price; ?>">    
-                                    <?php echo number_format($sale->pr_price,0); ?>
-                                </td>
-                                <td>
-                                    <input type="hidden" id="total_price" name="total_price[]" value="<?php echo $sale->total_price; ?>">    
-                                    <?php echo number_format($sale->total_price,0); ?>
-                                </td>
-                                <td>
-                                    <button type="button" onclick="saleDelete(<?php echo $sale->id; ?>)" class="btn btn-danger"><i class="ti-trash"></i></button>    
-                                </td>
-                            </tr>
-                            <?php } }?>
+<tr id="tr_sale_<?php echo $sale->id;?>" class="table_row">
+            <td><?php echo $a++; ?></td>
+        <td>
+            <input type="hidden" id="pr_id"  name="pr_id[]" value="<?php echo $sale->product_id; ?>">    
+            <input type="hidden" id="pr_code" name="pr_code[]" value="<?php echo $sale->pr_code; ?>">    
+            <?php echo $sale->pr_code; ?>
+        </td>
+        <td>
+            <input type="hidden" id="pr_name" name="pr_name[]" value="<?php echo $sale->pr_name; ?>">    
+            <?php echo $sale->pr_name; ?>
+        </td>
+        <td>
+            <input type="hidden" id="value" value="<?php echo $sale->pr_quantity; ?>">    
+            <input type="text" id="pr_quantity" 
+            onchange="Qty(<?php echo $sale->product_id; ?>)"
+            name="pr_quantity[]" class="form-control" style="width:100px ; text-align:center" value="<?php echo $sale->pr_quantity; ?>"/>    
+        </td>
+        <td>
+            <input type="hidden" id="pr_price" name="pr_price[]" value="<?php echo $sale->pr_price; ?>">    
+            <?php echo number_format($sale->pr_price,0); ?>
+        </td>
+        <td >
+            <input type="hidden" id="total_price" name="total_price[]" accept="Amount()" value="<?php echo $sale->total_price; ?>">    
+            <?php echo number_format($sale->total_price,0); ?>
+        </td>
+        <td>
+            <button type="button" onclick="saleDelete(<?php echo $sale->id; ?>)" class="btn btn-danger"><i class="ti-trash"></i></button>    
+        </td>
+    </tr>
+                            <?php }else{
+                                echo "<tr><td colspan='7' class='text-center'>هیچ کڕینێک نییە</td></tr>";
+                            } }?>
                         </tbody>
                     </table>
                                 </div>
                                     <div class="col-lg-3 mt-5">
-                                        <button type="button" onclick="clearAllSale()" class="btn btn-danger">سڕینەوەی هەمووی</button>
-                                        <button type="button" onclick="saveAllProduct()" class="btn btn-success">پاشەکەوتکردن</button>
-                                        <a type="button" href="small_invoice.php" target="_blanc" id="printer_btn" class="btn btn-primary">چاپکردن</a>
+                                        <button title="پاکردنەوەی هەمووی" type="button" onclick="clearAllSale()" class="btn btn-secondary"><i class="ti-reload"></i></button>
+                                        <button title="پاشەکەوتکردن" type="button" onclick="saveAllProduct(<?php echo rand(1,9999); ?>)" class="btn btn-success"><i class="ti-save-alt"></i></button>
+                                        <a title="وەصڵ" type="button" href="small_invoice.php" target="_blanc" id="printer_btn" class="btn btn-primary"> <i class="ti-files"></i></a>
                                     </div>
                                     </div>
                                 </div>

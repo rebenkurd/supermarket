@@ -18,5 +18,6 @@ require_once("class/category.php");
 require_once("class/company.php");
 require_once("class/product.php");
 require_once("class/role.php");
+require_once("class/order_customer.php");
 
 ?>

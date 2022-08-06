@@ -52,7 +52,7 @@
 	<li><a class="sidebar-sub-toggle"><i class="ti-shopping-cart-full" aria-hidden="true"></i> لیستی فرۆشراوەکان <span
 				class="sidebar-collapse-icon ti-angle-down"></span></a>
 		<ul>
-			<li><a href="order_list.php">بینینی فرۆشراوەکان</a></li>
+			<li><a href="order_customer.php">بینینی فرۆشراوەکان</a></li>
 			<li><a href="order_recycle.php">فرۆشراوە سڕاوەکان</a></li>
 		</ul>
 	</li>

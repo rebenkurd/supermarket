@@ -49,11 +49,13 @@ if(isset($_GET['id'])){
                                                     <th>کۆد</th>
                                                     <th>ناو</th>
                                                     <th>جۆر</th>
+                                                    <th>عەدەد</th>
                                                     <th>کۆمپانیا</th>
                                                     <th>ب.دەرچوون</th>
                                                     <th>ب.بەسەرچوون</th>
                                                     <th>نرخ</th>
                                                     <th>زیادکراوە لە لایەن</th>
+                                                    <th> قەرز </th>
                                                     <th> دۆخ </th>
                                                     <th>کردار</th>
                                                 </tr>
@@ -77,6 +79,7 @@ if(isset($_GET['id'])){
                                                     <td><?php echo $a++; ?></td>
                                                     <td><?php echo htmlentities($product->code,ENT_QUOTES,'UTF-8'); ?></td>
                                                     <td><?php echo htmlentities($product->name,ENT_QUOTES,'UTF-8'); ?></td>
+                                                    <td><?php echo htmlentities($product->quantity,ENT_QUOTES,'UTF-8'); ?></td>
                                                     <td><?php echo htmlentities($product->category,ENT_QUOTES,'UTF-8'); ?></td>
                                                     <td><?php echo htmlentities($product->company,ENT_QUOTES,'UTF-8'); ?></td>
                                                     <td><?php echo htmlentities($product->manufacture_date,ENT_QUOTES,'UTF-8'); ?></td>
@@ -86,6 +89,15 @@ if(isset($_GET['id'])){
                                                         $addedby=User::find_by_id($product->addedby);
                                                         echo htmlentities($addedby->first_name.' '.$addedby->last_name,ENT_QUOTES,'UTF-8');
                                                     ?></td>
+                                                    <td>
+                                                        <?php
+                                                        if($product->debt==0){
+                                                            echo '<span class="text-success">نەخێر</span>';
+                                                        }else{
+                                                            echo '<span class="text-warning">بەڵێ</span>';
+                                                        }
+                                                        ?>
+                                                    </td>
                                                     <td>
                                                         <?php
                                                             $tody=date('Y-m-d');

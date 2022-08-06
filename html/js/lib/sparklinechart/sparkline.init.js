@@ -189,7 +189,7 @@ $(document).ready(function() {
             highlightSpotColor: 'rgba(0,0,0,.2)'
         });
 
-        $('#sparklinedash').sparkline([ 0, 5, 6, 10, 9, 12, 4, 9], {
+        $('#sparklinedash').sparkline([ 10], {
             type: 'bar',
             height: '30',
             barWidth: '4',

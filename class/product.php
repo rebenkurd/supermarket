@@ -4,7 +4,7 @@
 class Product extends Db_Object{
 
     protected static $db_table="products";
-    protected static $db_table_fields=array('id','code','name','category','price','quantity','company','description','manufacture_date','expire_date','recycle','addedby','created_at','updated_at');
+    protected static $db_table_fields=array('id','code','name','category','price','quantity','company','description','manufacture_date','expire_date','debt','recycle','addedby','created_at','updated_at');
 
     public $id;
     public $code;
@@ -16,6 +16,7 @@ class Product extends Db_Object{
     public $description;
     public $manufacture_date;
     public $expire_date;
+    public $debt;
     public $recycle;
     public $addedby;
     public $created_at;
